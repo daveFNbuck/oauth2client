@@ -1,7 +1,7 @@
-oauth2client.contrib.gce module
+oauth2client_latest.contrib.gce module
 ===============================
 
-.. automodule:: oauth2client.contrib.gce
+.. automodule:: oauth2client_latest.contrib.gce
     :members:
     :undoc-members:
     :show-inheritance:

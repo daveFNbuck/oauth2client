@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Setup script for oauth2client.
+"""Setup script for oauth2client_latest.
 
 Also installs included versions of third party libraries, if those libraries
 are not already installed.
@@ -24,13 +24,13 @@ import sys
 from setuptools import find_packages
 from setuptools import setup
 
-import oauth2client
+import oauth2client_latest
 
 if sys.version_info < (2, 6):
-    print('oauth2client requires python2 version >= 2.6.', file=sys.stderr)
+    print('oauth2client_latest requires python2 version >= 2.6.', file=sys.stderr)
     sys.exit(1)
 if (3, 1) <= sys.version_info < (3, 3):
-    print('oauth2client requires python3 version >= 3.3.', file=sys.stderr)
+    print('oauth2client_latest requires python3 version >= 3.3.', file=sys.stderr)
     sys.exit(1)
 
 install_requires = [
@@ -41,17 +41,17 @@ install_requires = [
     'six>=1.6.1',
 ]
 
-long_desc = """The oauth2client is a client library for OAuth 2.0."""
+long_desc = """The oauth2client_latest is a client library for OAuth 2.0."""
 
-version = oauth2client.__version__
+version = oauth2client_latest.__version__
 
 setup(
-    name="oauth2client",
+    name="oauth2client_latest",
     version=version,
     description="OAuth 2.0 client library",
     long_description=long_desc,
     author="Google Inc.",
-    url="http://github.com/google/oauth2client/",
+    url="http://github.com/google/oauth2client_latest/",
     install_requires=install_requires,
     packages=find_packages(),
     license="Apache 2.0",

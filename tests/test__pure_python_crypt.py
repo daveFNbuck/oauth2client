@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Unit tests for oauth2client._pure_python_crypt."""
+"""Unit tests for oauth2client_latest._pure_python_crypt."""
 
 import os
 
@@ -22,9 +22,9 @@ import rsa
 import six
 import unittest2
 
-from oauth2client import _helpers
-from oauth2client import _pure_python_crypt
-from oauth2client import crypt
+from oauth2client_latest import _helpers
+from oauth2client_latest import _pure_python_crypt
+from oauth2client_latest import crypt
 
 
 class TestRsaVerifier(unittest2.TestCase):

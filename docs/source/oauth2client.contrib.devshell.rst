@@ -1,7 +1,7 @@
-oauth2client.contrib.devshell module
+oauth2client_latest.contrib.devshell module
 ====================================
 
-.. automodule:: oauth2client.contrib.devshell
+.. automodule:: oauth2client_latest.contrib.devshell
     :members:
     :undoc-members:
     :show-inheritance:

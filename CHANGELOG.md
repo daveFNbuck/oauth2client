@@ -6,30 +6,30 @@
 * Move GCE metadata interface to a separate module. (#520)
 * Populate `scopes` for GCE credentials. (#524)
 * Fix Python 3.5 compatibility. (#531)
-* Add `oauth2client.contrib.sqlalchemy`, a SQLAlchemy-based credential store. (#527)
+* Add `oauth2client_latest.contrib.sqlalchemy`, a SQLAlchemy-based credential store. (#527)
 * Improve error when an invalid client secret is provided. (#530)
-* Add `oauth2client.contrib.multiprocess_storage`. This supersedes the functionality in `oauth2client.contrib.multistore_file`. (#504)
+* Add `oauth2client_latest.contrib.multiprocess_storage`. This supersedes the functionality in `oauth2client_latest.contrib.multistore_file`. (#504)
 * Pull httplib2 usage into a separate transport module. (#559, #561)
-* Refactor all django-related code into `oauth2client.contrib.django_util`. Add `DjangoORMStorage`, remove `FlowField`. (#546)
+* Refactor all django-related code into `oauth2client_latest.contrib.django_util`. Add `DjangoORMStorage`, remove `FlowField`. (#546)
 * Fix application default credentials resolution order. (#570)
 * Add configurable timeout for GCE metadata server check. (#571)
 * Add warnings when using deprecated `approval_prompt='force'`. (#572)
-* Add deprecation warning to `oauth2client.contrib.multistore_file`. (#574)
+* Add deprecation warning to `oauth2client_latest.contrib.multistore_file`. (#574)
 * (Hygiene) PEP8 compliance and various style fixes (#537, #540, #552, #562)
-* (Hygiene) Remove duplicated exception classes in `oauth2client.contrib.appengine`. (#533)
+* (Hygiene) Remove duplicated exception classes in `oauth2client_latest.contrib.appengine`. (#533)
 
-NOTE: The next major release of oauth2client (v4.0.0) will remove the `oauth2client.contrib.multistore_file` module.
+NOTE: The next major release of oauth2client_latest (v4.0.0) will remove the `oauth2client_latest.contrib.multistore_file` module.
 
 ## v2.2.0
 
-* Added support to override `token_uri` and `revoke_uri` in `oauth2client.service_account.ServiceAccountCredentials`. (#510)
-* `oauth2client.contrib.multistore_file` now handles `OSError` in addition to `IOError` because Windows may raise `OSError` where other platforms will raise `IOError`.
-* `oauth2client.contrib.django_util` and `oauth2client.contrib.django_orm` have been updated to support Django 1.8 - 1.10. Versions of Django below 1.8 will not work with these modules.
+* Added support to override `token_uri` and `revoke_uri` in `oauth2client_latest.service_account.ServiceAccountCredentials`. (#510)
+* `oauth2client_latest.contrib.multistore_file` now handles `OSError` in addition to `IOError` because Windows may raise `OSError` where other platforms will raise `IOError`.
+* `oauth2client_latest.contrib.django_util` and `oauth2client_latest.contrib.django_orm` have been updated to support Django 1.8 - 1.10. Versions of Django below 1.8 will not work with these modules.
 
 ## v2.1.0
 
 * Add basic support for JWT access credentials. (#503)
-* Fix `oauth2client.client.DeviceFlowInfo` to use UTC instead of the system timezone when calculating code expiration.
+* Fix `oauth2client_latest.client.DeviceFlowInfo` to use UTC instead of the system timezone when calculating code expiration.
 
 ## v2.0.2
 
@@ -47,12 +47,12 @@ NOTE: The next major release of oauth2client (v4.0.0) will remove the `oauth2cli
 * Improving error message in P12 factory
   `ServiceAccountCredentials.from_p12_keyfile` when pyOpenSSL is
   missing. (#424)
-* Allowing default flags in `oauth2client.tools.run_flow()`
+* Allowing default flags in `oauth2client_latest.tools.run_flow()`
   rather than forcing users to create a dummy argparser (#426)
-* Removing `oauth2client.util.dict_to_tuple_key()` from public
+* Removing `oauth2client_latest.util.dict_to_tuple_key()` from public
   interface (#429)
-* Adding `oauth2client.contrib._appengine_ndb` helper module
-  for `oauth2client.contrib.appengine` and moving most code that
+* Adding `oauth2client_latest.contrib._appengine_ndb` helper module
+  for `oauth2client_latest.contrib.appengine` and moving most code that
   uses the `ndb` library into the helper (#434)
 * Fix error in `django_util` sample code (#438)
 
@@ -89,7 +89,7 @@ NOTE: The next major release of oauth2client (v4.0.0) will remove the `oauth2cli
 For JSON keys, you can create a credential via
 
 ```py
-from oauth2client.service_account import ServiceAccountCredentials
+from oauth2client_latest.service_account import ServiceAccountCredentials
 credentials = ServiceAccountCredentials.from_json_keyfile_name(
     key_file_name, scopes=[...])
 ```
@@ -97,7 +97,7 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(
 You can still rely on
 
 ```py
-from oauth2client.client import GoogleCredentials
+from oauth2client_latest.client import GoogleCredentials
 credentials = GoogleCredentials.get_application_default()
 ```
 
@@ -116,8 +116,8 @@ though we urge you to use JSON keys (rather than `.p12` keys) if you can.
 This is equivalent to the previous method
 
 ```py
-# PRE-oauth2client 2.0.0 EXAMPLE CODE!
-from oauth2client.client import SignedJwtAssertionCredentials
+# PRE-oauth2client_latest 2.0.0 EXAMPLE CODE!
+from oauth2client_latest.client import SignedJwtAssertionCredentials
 
 with open(key_file_name, 'rb') as key_file:
     private_key = key_file.read()
@@ -142,7 +142,7 @@ credentials = SignedJwtAssertionCredentials(
 
 * Fix (more like clarify) `bytes` / `str` handling in crypto
   methods. (#203, #250, #272)
-* Replacing `webapp` with `webapp2` in `oauth2client.appengine` (#217)
+* Replacing `webapp` with `webapp2` in `oauth2client_latest.appengine` (#217)
 * Added optional `state` parameter to
   `step1_get_authorize_url`. (#219 and #222)
 * Added `flask_util` module that provides a Flask extension to aid
@@ -236,14 +236,14 @@ credentials = SignedJwtAssertionCredentials(
 
 ## v1.4.1
 
-* Fix a critical bug on import in `oauth2client.tools`.
+* Fix a critical bug on import in `oauth2client_latest.tools`.
 
 ## v1.4
 
 * Merge python3 branch! Massive thanks due to @pferate and @methane for doing
   the heavy lifting.
 
-* Make `oauth2client.tools` import gracefully if `argparse` isn't present.
+* Make `oauth2client_latest.tools` import gracefully if `argparse` isn't present.
 
 * Change `flow.step2_exchange` to preserve the raw `id_token` in the
   `token_response` field.
@@ -283,14 +283,14 @@ credentials = SignedJwtAssertionCredentials(
 ## v1.2
 
 * The use of the `gflags` library is now deprecated, and is no longer a
-  dependency. If you are still using the `oauth2client.tools.run()` function
+  dependency. If you are still using the `oauth2client_latest.tools.run()` function
   then include `python-gflags` as a dependency of your application or switch to
-  `oauth2client.tools.run_flow`.
+  `oauth2client_latest.tools.run_flow`.
 * Samples have been updated to use the new `apiclient.sample_tools`, and no
   longer use `gflags`.
 * Added support for the experimental Object Change Notification, as found in
   the Cloud Storage API.
-* The oauth2client App Engine decorators are now threadsafe.
+* The oauth2client_latest App Engine decorators are now threadsafe.
 
 * Use the following redirects feature of httplib2 where it returns the
   ultimate URL after a series of redirects to avoid multiple hops for every
@@ -317,12 +317,12 @@ credentials = SignedJwtAssertionCredentials(
 * Many changes to move all the closures in `apiclient.discovery` into real
   classes and objects.
 * Make `from_json` behavior inheritable.
-* Expose the full token response in `OAuth2Client` and `OAuth2Decorator`.
+* Expose the full token response in `oauth2client_latest` and `OAuth2Decorator`.
 * Handle reasons that are None.
-* Added support for NDB based storing of oauth2client objects.
+* Added support for NDB based storing of oauth2client_latest objects.
 * Update `grant_type` for `AssertionCredentials`.
 * Adding a `.revoke()` to Credentials. Closes issue 98.
-* Modify `oauth2client.multistore_file` to store and retrieve credentials
+* Modify `oauth2client_latest.multistore_file` to store and retrieve credentials
   using an arbitrary key.
 * Don't accept `403` challenges by default for auth challenges.
 * Set `httplib2.RETRIES` to 1.
@@ -355,7 +355,7 @@ credentials = SignedJwtAssertionCredentials(
 * Switch to new discovery path parameters.
 * Add support for `additionalProperties` when printing schema'd objects.
 * [Fix media upload parameter names.](http://codereview.appspot.com/6374062/)
-* oauth2client support for URL-encoded format of exchange token response (e.g.
+* oauth2client_latest support for URL-encoded format of exchange token response (e.g.
   Facebook)
 * Build cleaner and easier to read docs for dynamic surfaces.
 
@@ -378,7 +378,7 @@ credentials = SignedJwtAssertionCredentials(
 * OAuth bug fixes and improvements.
   + Remove OAuth 1.0 support.
   + Added `credentials_from_code` and `credentials_from_clientsecrets_and_code`.
-  + Make oauth2client support Windows-friendly locking.
+  + Make oauth2client_latest support Windows-friendly locking.
   + Fix bug in `StorageByKeyName`.
   + Fix `None` handling in Django fields.
     [Fixes issue 128](http://codereview.appspot.com/6298084/).
@@ -401,7 +401,7 @@ credentials = SignedJwtAssertionCredentials(
 * Better support for proxies.
 * All Storages now have a `.delete()` method.
 * Important changes which might break your code:
-  + `apiclient.anyjson` has moved to `oauth2client.anyjson`.
+  + `apiclient.anyjson` has moved to `oauth2client_latest.anyjson`.
   + Some calls, for example, `taskqueue().lease()` used to require a parameter
     named body. In this new release only methods that really need to send a
     body require a body parameter, and so you may get errors about an unknown

@@ -1,7 +1,7 @@
-oauth2client.contrib.sqlalchemy module
+oauth2client_latest.contrib.sqlalchemy module
 ======================================
 
-.. automodule:: oauth2client.contrib.sqlalchemy
+.. automodule:: oauth2client_latest.contrib.sqlalchemy
     :members:
     :undoc-members:
     :show-inheritance:

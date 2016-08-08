@@ -1,7 +1,7 @@
-oauth2client.tools module
+oauth2client_latest.tools module
 =========================
 
-.. automodule:: oauth2client.tools
+.. automodule:: oauth2client_latest.tools
     :members:
     :undoc-members:
     :show-inheritance:

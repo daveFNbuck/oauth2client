@@ -19,9 +19,9 @@ import sqlalchemy.ext.declarative
 import sqlalchemy.orm
 import unittest2
 
-import oauth2client
-import oauth2client.client
-import oauth2client.contrib.sqlalchemy
+import oauth2client_latest
+import oauth2client_latest.client
+import oauth2client_latest.contrib.sqlalchemy
 
 Base = sqlalchemy.ext.declarative.declarative_base()
 
@@ -33,7 +33,7 @@ class DummyModel(Base):
     # we will query against this, because of ROWID
     key = sqlalchemy.Column(sqlalchemy.Integer)
     credentials = sqlalchemy.Column(
-        oauth2client.contrib.sqlalchemy.CredentialsType)
+        oauth2client_latest.contrib.sqlalchemy.CredentialsType)
 
 
 class TestSQLAlchemyStorage(unittest2.TestCase):
@@ -42,13 +42,13 @@ class TestSQLAlchemyStorage(unittest2.TestCase):
         Base.metadata.create_all(engine)
 
         self.session = sqlalchemy.orm.sessionmaker(bind=engine)
-        self.credentials = oauth2client.client.OAuth2Credentials(
+        self.credentials = oauth2client_latest.client.OAuth2Credentials(
             access_token='token',
             client_id='client_id',
             client_secret='client_secret',
             refresh_token='refresh_token',
             token_expiry=datetime.datetime.utcnow(),
-            token_uri=oauth2client.GOOGLE_TOKEN_URI,
+            token_uri=oauth2client_latest.GOOGLE_TOKEN_URI,
             user_agent='DummyAgent',
         )
 
@@ -68,7 +68,7 @@ class TestSQLAlchemyStorage(unittest2.TestCase):
 
     def test_get(self):
         session = self.session()
-        credentials_storage = oauth2client.contrib.sqlalchemy.Storage(
+        credentials_storage = oauth2client_latest.contrib.sqlalchemy.Storage(
             session=session,
             model_class=DummyModel,
             key_name='key',
@@ -86,7 +86,7 @@ class TestSQLAlchemyStorage(unittest2.TestCase):
 
     def test_put(self):
         session = self.session()
-        oauth2client.contrib.sqlalchemy.Storage(
+        oauth2client_latest.contrib.sqlalchemy.Storage(
             session=session,
             model_class=DummyModel,
             key_name='key',
@@ -108,7 +108,7 @@ class TestSQLAlchemyStorage(unittest2.TestCase):
 
         query = session.query(DummyModel).filter_by(key=1)
         self.assertIsNotNone(query.first())
-        oauth2client.contrib.sqlalchemy.Storage(
+        oauth2client_latest.contrib.sqlalchemy.Storage(
             session=session,
             model_class=DummyModel,
             key_name='key',

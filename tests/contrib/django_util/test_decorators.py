@@ -25,8 +25,8 @@ from six.moves import reload_module
 from six.moves.urllib import parse
 from tests.contrib.django_util import TestWithDjangoEnvironment
 
-import oauth2client.contrib.django_util
-from oauth2client.contrib.django_util import decorators
+import oauth2client_latest.contrib.django_util
+from oauth2client_latest.contrib.django_util import decorators
 
 
 class OAuth2EnabledDecoratorTest(TestWithDjangoEnvironment):
@@ -38,7 +38,7 @@ class OAuth2EnabledDecoratorTest(TestWithDjangoEnvironment):
         # OAuth2 Settings gets configured based on Django settings
         # at import time, so in order for us to reload the settings
         # we need to reload the module
-        reload_module(oauth2client.contrib.django_util)
+        reload_module(oauth2client_latest.contrib.django_util)
         self.user = User.objects.create_user(
             username='bill', email='bill@example.com', password='hunter2')
 
@@ -60,7 +60,7 @@ class OAuth2EnabledDecoratorTest(TestWithDjangoEnvironment):
         self.assertFalse(request.oauth.has_credentials())
         self.assertIsNone(request.oauth.http)
 
-    @mock.patch('oauth2client.client.OAuth2Credentials')
+    @mock.patch('oauth2client_latest.client.OAuth2Credentials')
     def test_has_credentials_in_storage(self, OAuth2Credentials):
         request = self.factory.get('/test')
         request.session = mock.MagicMock()
@@ -85,7 +85,7 @@ class OAuth2EnabledDecoratorTest(TestWithDjangoEnvironment):
             request.oauth.scopes,
             set(django.conf.settings.GOOGLE_OAUTH2_SCOPES))
 
-    @mock.patch('oauth2client.contrib.dictionary_storage.DictionaryStorage')
+    @mock.patch('oauth2client_latest.contrib.dictionary_storage.DictionaryStorage')
     def test_specified_scopes(self, dictionary_storage_mock):
         request = self.factory.get('/test')
         request.session = mock.MagicMock()
@@ -112,7 +112,7 @@ class OAuth2RequiredDecoratorTest(TestWithDjangoEnvironment):
         super(OAuth2RequiredDecoratorTest, self).setUp()
         self.save_settings = copy.deepcopy(django.conf.settings)
 
-        reload_module(oauth2client.contrib.django_util)
+        reload_module(oauth2client_latest.contrib.django_util)
         self.user = User.objects.create_user(
             username='bill', email='bill@example.com', password='hunter2')
 
@@ -138,7 +138,7 @@ class OAuth2RequiredDecoratorTest(TestWithDjangoEnvironment):
         self.assertEqual(response.status_code,
                          http.HttpResponseRedirect.status_code)
 
-    @mock.patch('oauth2client.contrib.django_util.UserOAuth2', autospec=True)
+    @mock.patch('oauth2client_latest.contrib.django_util.UserOAuth2', autospec=True)
     def test_has_credentials_in_storage(self, UserOAuth2):
         request = self.factory.get('/test')
         request.session = mock.MagicMock()
@@ -156,7 +156,7 @@ class OAuth2RequiredDecoratorTest(TestWithDjangoEnvironment):
         self.assertEqual(response.status_code, http_client.OK)
         self.assertEqual(response.content, b"test")
 
-    @mock.patch('oauth2client.client.OAuth2Credentials')
+    @mock.patch('oauth2client_latest.client.OAuth2Credentials')
     def test_has_credentials_in_storage_no_scopes(
             self, OAuth2Credentials):
         request = self.factory.get('/test')
@@ -176,7 +176,7 @@ class OAuth2RequiredDecoratorTest(TestWithDjangoEnvironment):
         self.assertEqual(
             response.status_code, django.http.HttpResponseRedirect.status_code)
 
-    @mock.patch('oauth2client.client.OAuth2Credentials')
+    @mock.patch('oauth2client_latest.client.OAuth2Credentials')
     def test_specified_scopes(self, OAuth2Credentials):
         request = self.factory.get('/test')
         request.session = mock.MagicMock()
@@ -208,7 +208,7 @@ class OAuth2RequiredDecoratorStorageModelTest(TestWithDjangoEnvironment):
         }
         django.conf.settings.GOOGLE_OAUTH2_STORAGE_MODEL = STORAGE_MODEL
 
-        reload_module(oauth2client.contrib.django_util)
+        reload_module(oauth2client_latest.contrib.django_util)
         self.user = User.objects.create_user(
             username='bill', email='bill@example.com', password='hunter2')
 

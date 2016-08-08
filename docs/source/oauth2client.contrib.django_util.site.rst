@@ -1,7 +1,7 @@
-oauth2client.contrib.django_util.site module
+oauth2client_latest.contrib.django_util.site module
 ============================================
 
-.. automodule:: oauth2client.contrib.django_util.site
+.. automodule:: oauth2client_latest.contrib.django_util.site
     :members:
     :undoc-members:
     :show-inheritance:

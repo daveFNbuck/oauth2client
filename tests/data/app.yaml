@@ -1,5 +1,5 @@
 # Dummy app.yaml to placate nosegae.
-application: oauth2client
+application: oauth2client_latest
 version: 1
 runtime: python27
 api_version: 1

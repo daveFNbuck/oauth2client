@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for oauth2client.contrib.devshell."""
+"""Tests for oauth2client_latest.contrib.devshell."""
 
 import datetime
 import json
@@ -23,9 +23,9 @@ import threading
 import mock
 import unittest2
 
-from oauth2client import _helpers
-from oauth2client import client
-from oauth2client.contrib import devshell
+from oauth2client_latest import _helpers
+from oauth2client_latest import client
+from oauth2client_latest.contrib import devshell
 
 # A dummy value to use for the expires_in field
 # in CredentialInfoResponse.
@@ -74,7 +74,7 @@ class TestCredentialInfoResponse(unittest2.TestCase):
 class Test_SendRecv(unittest2.TestCase):
 
     def test_port_zero(self):
-        with mock.patch('oauth2client.contrib.devshell.os') as os_mod:
+        with mock.patch('oauth2client_latest.contrib.devshell.os') as os_mod:
             os_mod.getenv = mock.MagicMock(name='getenv', return_value=0)
             with self.assertRaises(devshell.NoDevshellServer):
                 devshell._SendRecv()
@@ -88,10 +88,10 @@ class Test_SendRecv(unittest2.TestCase):
         sock.recv(6).decode = mock.MagicMock(
             name='decode', return_value=header_without_newline)
 
-        with mock.patch('oauth2client.contrib.devshell.os') as os_mod:
+        with mock.patch('oauth2client_latest.contrib.devshell.os') as os_mod:
             os_mod.getenv = mock.MagicMock(name='getenv',
                                            return_value=non_zero_port)
-            with mock.patch('oauth2client.contrib.devshell.socket') as socket:
+            with mock.patch('oauth2client_latest.contrib.devshell.socket') as socket:
                 socket.socket = mock.MagicMock(name='socket',
                                                return_value=sock)
                 with self.assertRaises(devshell.CommunicationError):
@@ -207,7 +207,7 @@ class DevshellCredentialsTests(unittest2.TestCase):
             creds = devshell.DevshellCredentials()
             self.assertEquals(None, creds.refresh_token)
 
-    @mock.patch('oauth2client.client._UTCNOW')
+    @mock.patch('oauth2client_latest.client._UTCNOW')
     def test_reads_credentials(self, utcnow):
         NOW = datetime.datetime(1992, 12, 31)
         utcnow.return_value = NOW

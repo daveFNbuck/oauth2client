@@ -25,9 +25,9 @@ from six.moves import reload_module
 from tests.contrib.django_util import TestWithDjangoEnvironment
 import unittest2
 
-from oauth2client.contrib import django_util
-import oauth2client.contrib.django_util
-from oauth2client.contrib.django_util import (
+from oauth2client_latest.contrib import django_util
+import oauth2client_latest.contrib.django_util
+from oauth2client_latest.contrib.django_util import (
     _CREDENTIALS_KEY, get_storage, site, UserOAuth2)
 
 
@@ -43,12 +43,12 @@ class OAuth2SetupTest(unittest2.TestCase):
         # OAuth2 Settings gets configured based on Django settings
         # at import time, so in order for us to reload the settings
         # we need to reload the module
-        reload_module(oauth2client.contrib.django_util)
+        reload_module(oauth2client_latest.contrib.django_util)
 
     def tearDown(self):
         django.conf.settings = copy.deepcopy(self.save_settings)
 
-    @mock.patch("oauth2client.contrib.django_util.clientsecrets")
+    @mock.patch("oauth2client_latest.contrib.django_util.clientsecrets")
     def test_settings_initialize(self, clientsecrets):
         django.conf.settings.GOOGLE_OAUTH2_CLIENT_SECRETS_JSON = 'file.json'
         clientsecrets.loadfile.return_value = (
@@ -65,7 +65,7 @@ class OAuth2SetupTest(unittest2.TestCase):
         self.assertEqual(oauth2_settings.client_secret, 'hunter2')
         django.conf.settings.GOOGLE_OAUTH2_CLIENT_SECRETS_JSON = None
 
-    @mock.patch("oauth2client.contrib.django_util.clientsecrets")
+    @mock.patch("oauth2client_latest.contrib.django_util.clientsecrets")
     def test_settings_initialize_invalid_type(self, clientsecrets):
         django.conf.settings.GOOGLE_OAUTH2_CLIENT_SECRETS_JSON = 'file.json'
         clientsecrets.loadfile.return_value = (
@@ -81,7 +81,7 @@ class OAuth2SetupTest(unittest2.TestCase):
                 object.__new__(django_util.OAuth2Settings),
                 django.conf.settings)
 
-    @mock.patch("oauth2client.contrib.django_util.clientsecrets")
+    @mock.patch("oauth2client_latest.contrib.django_util.clientsecrets")
     def test_no_settings(self, clientsecrets):
         django.conf.settings.GOOGLE_OAUTH2_CLIENT_SECRETS_JSON = None
         django.conf.settings.GOOGLE_OAUTH2_CLIENT_SECRET = None
@@ -92,7 +92,7 @@ class OAuth2SetupTest(unittest2.TestCase):
                 object.__new__(django_util.OAuth2Settings),
                 django.conf.settings)
 
-    @mock.patch("oauth2client.contrib.django_util.clientsecrets")
+    @mock.patch("oauth2client_latest.contrib.django_util.clientsecrets")
     def test_no_session_middleware(self, clientsecrets):
         django.conf.settings.MIDDLEWARE_CLASSES = ()
 
@@ -126,7 +126,7 @@ class SessionStorageTest(TestWithDjangoEnvironment):
     def setUp(self):
         super(SessionStorageTest, self).setUp()
         self.save_settings = copy.deepcopy(django.conf.settings)
-        reload_module(oauth2client.contrib.django_util)
+        reload_module(oauth2client_latest.contrib.django_util)
 
     def tearDown(self):
         super(SessionStorageTest, self).tearDown()
@@ -156,7 +156,7 @@ class TestUserOAuth2Object(TestWithDjangoEnvironment):
             'credentials_property': 'credentials'
         }
         django.conf.settings.GOOGLE_OAUTH2_STORAGE_MODEL = STORAGE_MODEL
-        reload_module(oauth2client.contrib.django_util)
+        reload_module(oauth2client_latest.contrib.django_util)
 
     def tearDown(self):
         super(TestUserOAuth2Object, self).tearDown()

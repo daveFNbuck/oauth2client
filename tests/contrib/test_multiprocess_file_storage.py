@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Unit tests for oauth2client.multistore_file."""
+"""Unit tests for oauth2client_latest.multistore_file."""
 
 import contextlib
 import datetime
@@ -26,8 +26,8 @@ import mock
 from six import StringIO
 import unittest2
 
-from oauth2client import client
-from oauth2client.contrib import multiprocess_file_storage
+from oauth2client_latest import client
+from oauth2client_latest.contrib import multiprocess_file_storage
 
 from ..http_mock import HttpMockSequence
 
@@ -79,7 +79,7 @@ class MultiprocessStorageBehaviorTests(unittest2.TestCase):
 
     def setUp(self):
         filehandle, self.filename = tempfile.mkstemp(
-            'oauth2client_test.data')
+            'oauth2client_latest_test.data')
         os.close(filehandle)
 
     def tearDown(self):
@@ -204,7 +204,7 @@ class MultiprocessStorageUnitTests(unittest2.TestCase):
 
     def setUp(self):
         filehandle, self.filename = tempfile.mkstemp(
-            'oauth2client_test.data')
+            'oauth2client_latest_test.data')
         os.close(filehandle)
 
     def tearDown(self):

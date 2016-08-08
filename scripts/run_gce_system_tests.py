@@ -19,9 +19,9 @@ from six.moves import http_client
 from six.moves import urllib
 import unittest2
 
-from oauth2client import GOOGLE_TOKEN_INFO_URI
-from oauth2client.client import GoogleCredentials
-from oauth2client.contrib.gce import AppAssertionCredentials
+from oauth2client_latest import GOOGLE_TOKEN_INFO_URI
+from oauth2client_latest.client import GoogleCredentials
+from oauth2client_latest.contrib.gce import AppAssertionCredentials
 
 
 class TestComputeEngine(unittest2.TestCase):

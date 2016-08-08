@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Oauth2client tests
+"""oauth2client_latest tests
 
-Unit tests for oauth2client.
+Unit tests for oauth2client_latest.
 """
 
 import base64
@@ -33,11 +33,11 @@ from six.moves import http_client
 from six.moves import urllib
 import unittest2
 
-import oauth2client
-from oauth2client import _helpers
-from oauth2client import client
-from oauth2client import clientsecrets
-from oauth2client import service_account
+import oauth2client_latest
+from oauth2client_latest import _helpers
+from oauth2client_latest import client
+from oauth2client_latest import clientsecrets
+from oauth2client_latest import service_account
 from . import http_mock
 
 __author__ = 'jcgregorio@google.com (Joe Gregorio)'
@@ -176,7 +176,7 @@ class CredentialsTests(unittest2.TestCase):
 
     def test_new_from_json_basic_data(self):
         creds_data = {
-            '_module': 'oauth2client.client',
+            '_module': 'oauth2client_latest.client',
             '_class': 'Credentials',
         }
         json_data = json.dumps(creds_data)
@@ -185,7 +185,7 @@ class CredentialsTests(unittest2.TestCase):
 
     def test_new_from_json_old_name(self):
         creds_data = {
-            '_module': 'oauth2client.googleapiclient.client',
+            '_module': 'oauth2client_latest.googleapiclient.client',
             '_class': 'Credentials',
         }
         json_data = json.dumps(creds_data)
@@ -194,7 +194,7 @@ class CredentialsTests(unittest2.TestCase):
 
     def test_new_from_json_bad_module(self):
         creds_data = {
-            '_module': 'oauth2client.foobar',
+            '_module': 'oauth2client_latest.foobar',
             '_class': 'Credentials',
         }
         json_data = json.dumps(creds_data)
@@ -203,7 +203,7 @@ class CredentialsTests(unittest2.TestCase):
 
     def test_new_from_json_bad_class(self):
         creds_data = {
-            '_module': 'oauth2client.client',
+            '_module': 'oauth2client_latest.client',
             '_class': 'NopeNotCredentials',
         }
         json_data = json.dumps(creds_data)
@@ -284,7 +284,7 @@ class GoogleCredentialsTests(unittest2.TestCase):
         self.assertEqual('secret', credentials.client_secret)
         self.assertEqual('alabalaportocala', credentials.refresh_token)
         self.assertEqual(None, credentials.token_expiry)
-        self.assertEqual(oauth2client.GOOGLE_TOKEN_URI, credentials.token_uri)
+        self.assertEqual(oauth2client_latest.GOOGLE_TOKEN_URI, credentials.token_uri)
         self.assertEqual('Python client library', credentials.user_agent)
 
     def get_a_google_credentials_object(self):
@@ -377,9 +377,9 @@ class GoogleCredentialsTests(unittest2.TestCase):
         if socket_error:
             connection.getresponse.side_effect = socket.error()
 
-        with mock.patch('oauth2client.client.os') as os_module:
+        with mock.patch('oauth2client_latest.client.os') as os_module:
             os_module.environ = {client._SERVER_SOFTWARE: server_software}
-            with mock.patch('oauth2client.client.six') as six_module:
+            with mock.patch('oauth2client_latest.client.six') as six_module:
                 http_client_module = six_module.moves.http_client
                 http_client_module.HTTPConnection = mock.MagicMock(
                     name='HTTPConnection', return_value=connection)
@@ -603,10 +603,10 @@ class GoogleCredentialsTests(unittest2.TestCase):
             client._raise_exception_for_reading_json(
                 credential_file, extra_help, error)
 
-    @mock.patch('oauth2client.client._in_gce_environment')
-    @mock.patch('oauth2client.client._in_gae_environment', return_value=False)
-    @mock.patch('oauth2client.client._get_environment_variable_file')
-    @mock.patch('oauth2client.client._get_well_known_file')
+    @mock.patch('oauth2client_latest.client._in_gce_environment')
+    @mock.patch('oauth2client_latest.client._in_gae_environment', return_value=False)
+    @mock.patch('oauth2client_latest.client._get_environment_variable_file')
+    @mock.patch('oauth2client_latest.client._get_well_known_file')
     def test_get_adc_from_env_var_service_account(self, *stubs):
         # Set up stubs.
         get_well_known, get_env_file, in_gae, in_gce = stubs
@@ -626,10 +626,10 @@ class GoogleCredentialsTests(unittest2.TestCase):
         self.test_get_adc_from_env_var_service_account()
         self.assertEqual(client.DEFAULT_ENV_NAME, client.SETTINGS.env_name)
 
-    @mock.patch('oauth2client.client._in_gce_environment')
-    @mock.patch('oauth2client.client._in_gae_environment', return_value=False)
-    @mock.patch('oauth2client.client._get_environment_variable_file')
-    @mock.patch('oauth2client.client._get_well_known_file')
+    @mock.patch('oauth2client_latest.client._in_gce_environment')
+    @mock.patch('oauth2client_latest.client._in_gae_environment', return_value=False)
+    @mock.patch('oauth2client_latest.client._get_environment_variable_file')
+    @mock.patch('oauth2client_latest.client._get_well_known_file')
     def test_get_adc_from_env_var_authorized_user(self, *stubs):
         # Set up stubs.
         get_well_known, get_env_file, in_gae, in_gce = stubs
@@ -645,10 +645,10 @@ class GoogleCredentialsTests(unittest2.TestCase):
         in_gae.assert_not_called()
         in_gce.assert_not_called()
 
-    @mock.patch('oauth2client.client._in_gce_environment')
-    @mock.patch('oauth2client.client._in_gae_environment', return_value=False)
-    @mock.patch('oauth2client.client._get_environment_variable_file')
-    @mock.patch('oauth2client.client._get_well_known_file')
+    @mock.patch('oauth2client_latest.client._in_gce_environment')
+    @mock.patch('oauth2client_latest.client._in_gae_environment', return_value=False)
+    @mock.patch('oauth2client_latest.client._get_environment_variable_file')
+    @mock.patch('oauth2client_latest.client._get_well_known_file')
     def test_get_adc_from_env_var_malformed_file(self, *stubs):
         # Set up stubs.
         get_well_known, get_env_file, in_gae, in_gce = stubs
@@ -670,11 +670,11 @@ class GoogleCredentialsTests(unittest2.TestCase):
         in_gae.assert_not_called()
         in_gce.assert_not_called()
 
-    @mock.patch('oauth2client.client._in_gce_environment', return_value=False)
-    @mock.patch('oauth2client.client._in_gae_environment', return_value=False)
-    @mock.patch('oauth2client.client._get_environment_variable_file',
+    @mock.patch('oauth2client_latest.client._in_gce_environment', return_value=False)
+    @mock.patch('oauth2client_latest.client._in_gae_environment', return_value=False)
+    @mock.patch('oauth2client_latest.client._get_environment_variable_file',
                 return_value=None)
-    @mock.patch('oauth2client.client._get_well_known_file',
+    @mock.patch('oauth2client_latest.client._get_well_known_file',
                 return_value='BOGUS_FILE')
     def test_get_adc_env_not_set_up(self, *stubs):
         # Unpack stubs.
@@ -692,11 +692,11 @@ class GoogleCredentialsTests(unittest2.TestCase):
         in_gae.assert_called_once_with()
         in_gce.assert_called_once_with()
 
-    @mock.patch('oauth2client.client._in_gce_environment', return_value=False)
-    @mock.patch('oauth2client.client._in_gae_environment', return_value=False)
-    @mock.patch('oauth2client.client._get_environment_variable_file',
+    @mock.patch('oauth2client_latest.client._in_gce_environment', return_value=False)
+    @mock.patch('oauth2client_latest.client._in_gae_environment', return_value=False)
+    @mock.patch('oauth2client_latest.client._get_environment_variable_file',
                 return_value=None)
-    @mock.patch('oauth2client.client._get_well_known_file')
+    @mock.patch('oauth2client_latest.client._get_well_known_file')
     def test_get_adc_env_from_well_known(self, *stubs):
         # Unpack stubs.
         get_well_known, get_env_file, in_gae, in_gce = stubs
@@ -706,7 +706,7 @@ class GoogleCredentialsTests(unittest2.TestCase):
         self.assertTrue(os.path.exists(get_well_known.return_value))
 
         method_name = \
-            'oauth2client.client._get_application_default_credential_from_file'
+            'oauth2client_latest.client._get_application_default_credential_from_file'
         result_creds = object()
         with mock.patch(method_name,
                         return_value=result_creds) as get_from_file:
@@ -877,9 +877,9 @@ class BasicCredentialsTests(unittest2.TestCase):
         user_agent = 'refresh_checker/1.0'
         self.credentials = client.OAuth2Credentials(
             access_token, client_id, client_secret,
-            refresh_token, token_expiry, oauth2client.GOOGLE_TOKEN_URI,
-            user_agent, revoke_uri=oauth2client.GOOGLE_REVOKE_URI,
-            scopes='foo', token_info_uri=oauth2client.GOOGLE_TOKEN_INFO_URI)
+            refresh_token, token_expiry, oauth2client_latest.GOOGLE_TOKEN_URI,
+            user_agent, revoke_uri=oauth2client_latest.GOOGLE_REVOKE_URI,
+            scopes='foo', token_info_uri=oauth2client_latest.GOOGLE_TOKEN_INFO_URI)
 
         # Provoke a failure if @_helpers.positional is not respected.
         self.old_positional_enforcement = (
@@ -990,15 +990,15 @@ class BasicCredentialsTests(unittest2.TestCase):
         client_secret = u'cOuDdkfjxxnv+'
         refresh_token = u'1/0/a.df219fjls0'
         token_expiry = str(datetime.datetime.utcnow())
-        token_uri = str(oauth2client.GOOGLE_TOKEN_URI)
-        revoke_uri = str(oauth2client.GOOGLE_REVOKE_URI)
+        token_uri = str(oauth2client_latest.GOOGLE_TOKEN_URI)
+        revoke_uri = str(oauth2client_latest.GOOGLE_REVOKE_URI)
         user_agent = u'refresh_checker/1.0'
         credentials = client.OAuth2Credentials(
             access_token, client_id, client_secret, refresh_token,
             token_expiry, token_uri, user_agent, revoke_uri=revoke_uri)
 
         # First, test that we correctly encode basic objects, making sure
-        # to include a bytes object. Note that oauth2client will normalize
+        # to include a bytes object. Note that oauth2client_latest will normalize
         # everything to bytes, no matter what python version we're in.
         http = credentials.authorize(http_mock.HttpMock())
         headers = {u'foo': 3, b'bar': True, 'baz': b'abc'}
@@ -1020,8 +1020,8 @@ class BasicCredentialsTests(unittest2.TestCase):
         client_secret = u'cOuDdkfjxxnv+'
         refresh_token = u'1/0/a.df219fjls0'
         token_expiry = str(datetime.datetime.utcnow())
-        token_uri = str(oauth2client.GOOGLE_TOKEN_URI)
-        revoke_uri = str(oauth2client.GOOGLE_REVOKE_URI)
+        token_uri = str(oauth2client_latest.GOOGLE_TOKEN_URI)
+        revoke_uri = str(oauth2client_latest.GOOGLE_REVOKE_URI)
         user_agent = u'refresh_checker/1.0'
         credentials = client.OAuth2Credentials(
             access_token, client_id, client_secret, refresh_token,
@@ -1053,7 +1053,7 @@ class BasicCredentialsTests(unittest2.TestCase):
         self.assertIsNone(credentials.token_expiry)
         self.assertIsNone(credentials._expires_in())
 
-    @mock.patch('oauth2client.client._UTCNOW')
+    @mock.patch('oauth2client_latest.client._UTCNOW')
     def test__expires_in_expired(self, utcnow):
         credentials = client.OAuth2Credentials(None, None, None, None,
                                                None, None, None)
@@ -1064,7 +1064,7 @@ class BasicCredentialsTests(unittest2.TestCase):
         self.assertEqual(credentials._expires_in(), 0)
         utcnow.assert_called_once_with()
 
-    @mock.patch('oauth2client.client._UTCNOW')
+    @mock.patch('oauth2client_latest.client._UTCNOW')
     def test__expires_in_not_expired(self, utcnow):
         credentials = client.OAuth2Credentials(None, None, None, None,
                                                None, None, None)
@@ -1076,7 +1076,7 @@ class BasicCredentialsTests(unittest2.TestCase):
         self.assertEqual(credentials._expires_in(), seconds)
         utcnow.assert_called_once_with()
 
-    @mock.patch('oauth2client.client._UTCNOW')
+    @mock.patch('oauth2client_latest.client._UTCNOW')
     def test_get_access_token(self, utcnow):
         # Configure the patch.
         seconds = 11
@@ -1171,7 +1171,7 @@ class BasicCredentialsTests(unittest2.TestCase):
         # Specify a token so we can use it in the response.
         credentials.access_token = 'ya29-s3kr3t'
 
-        with mock.patch('oauth2client.transport.get_http_object',
+        with mock.patch('oauth2client_latest.transport.get_http_object',
                         return_value=object()) as new_http:
             token_info = credentials.get_access_token()
             expires_in.assert_called_once_with()
@@ -1212,7 +1212,7 @@ class BasicCredentialsTests(unittest2.TestCase):
     @mock.patch.object(client.OAuth2Credentials,
                        '_generate_refresh_request_body',
                        return_value=object())
-    @mock.patch('oauth2client.client.logger')
+    @mock.patch('oauth2client_latest.client.logger')
     def _do_refresh_request_test_helper(self, response, content,
                                         error_msg, logger, gen_body,
                                         gen_headers, store=None):
@@ -1278,12 +1278,12 @@ class BasicCredentialsTests(unittest2.TestCase):
         error_msg = '{0}: {1}'.format(base_error, error_desc)
         self._do_refresh_request_test_helper(response, content, error_msg)
 
-    @mock.patch('oauth2client.client.logger')
+    @mock.patch('oauth2client_latest.client.logger')
     def _do_revoke_test_helper(self, response, content,
                                error_msg, logger, store=None):
         credentials = client.OAuth2Credentials(
             None, None, None, None, None, None, None,
-            revoke_uri=oauth2client.GOOGLE_REVOKE_URI)
+            revoke_uri=oauth2client_latest.GOOGLE_REVOKE_URI)
         credentials.store = store
         http_request = mock.Mock()
         http_request.return_value = response, content
@@ -1305,7 +1305,7 @@ class BasicCredentialsTests(unittest2.TestCase):
             if store is not None:
                 store.delete.assert_not_called()
 
-        revoke_uri = oauth2client.GOOGLE_REVOKE_URI + '?token=' + token
+        revoke_uri = oauth2client_latest.GOOGLE_REVOKE_URI + '?token=' + token
         http_request.assert_called_once_with(revoke_uri)
 
         logger.info.assert_called_once_with('Revoking token')
@@ -1346,12 +1346,12 @@ class BasicCredentialsTests(unittest2.TestCase):
         self._do_revoke_test_helper(response, content, error_msg,
                                     store=store)
 
-    @mock.patch('oauth2client.client.logger')
+    @mock.patch('oauth2client_latest.client.logger')
     def _do_retrieve_scopes_test_helper(self, response, content,
                                         error_msg, logger, scopes=None):
         credentials = client.OAuth2Credentials(
             None, None, None, None, None, None, None,
-            token_info_uri=oauth2client.GOOGLE_TOKEN_INFO_URI)
+            token_info_uri=oauth2client_latest.GOOGLE_TOKEN_INFO_URI)
         http_request = mock.Mock()
         http_request.return_value = response, content
         token = u's3kr3tz'
@@ -1370,7 +1370,7 @@ class BasicCredentialsTests(unittest2.TestCase):
             self.assertEqual(exc_manager.exception.args, (error_msg,))
 
         token_uri = client._update_query_params(
-            oauth2client.GOOGLE_TOKEN_INFO_URI,
+            oauth2client_latest.GOOGLE_TOKEN_INFO_URI,
             {'fields': 'scope', 'access_token': token})
         self.assertEqual(len(http_request.mock_calls), 1)
         scopes_call = http_request.mock_calls[0]
@@ -1476,7 +1476,7 @@ class AccessTokenCredentialsTests(unittest2.TestCase):
         user_agent = 'refresh_checker/1.0'
         self.credentials = client.AccessTokenCredentials(
             access_token, user_agent,
-            revoke_uri=oauth2client.GOOGLE_REVOKE_URI)
+            revoke_uri=oauth2client_latest.GOOGLE_REVOKE_URI)
 
     def test_token_refresh_success(self):
         for status_code in client.REFRESH_STATUS_CODES:
@@ -1655,7 +1655,7 @@ class OAuth2WebServerFlowTest(unittest2.TestCase):
             'approval_prompt': 'other'})
         self.assertEqual(params['approval_prompt'], 'other')
 
-    @mock.patch('oauth2client.client.logger')
+    @mock.patch('oauth2client_latest.client.logger')
     def test_step1_get_authorize_url_redirect_override(self, logger):
         flow = client.OAuth2WebServerFlow('client_id+1', scope='foo',
                                           redirect_uri=client.OOB_CALLBACK_URN)
@@ -1722,7 +1722,7 @@ class OAuth2WebServerFlowTest(unittest2.TestCase):
             ({'status': http_client.OK}, content),
         ])
         if default_http:
-            with mock.patch('oauth2client.transport.get_http_object',
+            with mock.patch('oauth2client_latest.transport.get_http_object',
                             return_value=http) as new_http:
                 result = flow.step1_get_device_and_user_codes()
                 # Check the mock was called.
@@ -1735,7 +1735,7 @@ class OAuth2WebServerFlowTest(unittest2.TestCase):
         self.assertEqual(result, expected)
         self.assertEqual(len(http.requests), 1)
         self.assertEqual(
-            http.requests[0]['uri'], oauth2client.GOOGLE_DEVICE_URI)
+            http.requests[0]['uri'], oauth2client_latest.GOOGLE_DEVICE_URI)
         body = http.requests[0]['body']
         self.assertEqual(urllib.parse.parse_qs(body),
                          {'client_id': [flow.client_id],
@@ -2032,7 +2032,7 @@ class FlowFromCachedClientsecrets(unittest2.TestCase):
             'some_secrets', '', redirect_uri='oob', cache=cache_mock)
         self.assertEqual('foo_client_secret', flow.client_secret)
 
-    @mock.patch('oauth2client.clientsecrets.loadfile')
+    @mock.patch('oauth2client_latest.clientsecrets.loadfile')
     def _flow_from_clientsecrets_success_helper(self, loadfile_mock,
                                                 device_uri=None,
                                                 revoke_uri=None):
@@ -2072,7 +2072,7 @@ class FlowFromCachedClientsecrets(unittest2.TestCase):
         revoke_uri = 'http://revoke.uri'
         self._flow_from_clientsecrets_success_helper(revoke_uri=revoke_uri)
 
-    @mock.patch('oauth2client.clientsecrets.loadfile',
+    @mock.patch('oauth2client_latest.clientsecrets.loadfile',
                 side_effect=clientsecrets.InvalidClientSecretsError)
     def test_flow_from_clientsecrets_invalid(self, loadfile_mock):
         filename = object()
@@ -2082,7 +2082,7 @@ class FlowFromCachedClientsecrets(unittest2.TestCase):
                 filename, None, cache=cache, message=None)
         loadfile_mock.assert_called_once_with(filename, cache=cache)
 
-    @mock.patch('oauth2client.clientsecrets.loadfile',
+    @mock.patch('oauth2client_latest.clientsecrets.loadfile',
                 side_effect=clientsecrets.InvalidClientSecretsError)
     @mock.patch('sys.exit')
     def test_flow_from_clientsecrets_invalid_w_msg(self, sys_exit,
@@ -2096,7 +2096,7 @@ class FlowFromCachedClientsecrets(unittest2.TestCase):
         sys_exit.assert_called_once_with(message)
         loadfile_mock.assert_called_once_with(filename, cache=cache)
 
-    @mock.patch('oauth2client.clientsecrets.loadfile',
+    @mock.patch('oauth2client_latest.clientsecrets.loadfile',
                 side_effect=clientsecrets.InvalidClientSecretsError('foobar'))
     @mock.patch('sys.exit')
     def test_flow_from_clientsecrets_invalid_w_msg_and_text(self, sys_exit,
@@ -2112,7 +2112,7 @@ class FlowFromCachedClientsecrets(unittest2.TestCase):
         sys_exit.assert_called_once_with(expected)
         loadfile_mock.assert_called_once_with(filename, cache=cache)
 
-    @mock.patch('oauth2client.clientsecrets.loadfile')
+    @mock.patch('oauth2client_latest.clientsecrets.loadfile')
     def test_flow_from_clientsecrets_unknown_flow(self, loadfile_mock):
         client_type = 'UNKNOWN'
         loadfile_mock.return_value = client_type, None
@@ -2226,9 +2226,9 @@ class Test__save_private_file(unittest2.TestCase):
 class Test__get_application_default_credential_GAE(unittest2.TestCase):
 
     @mock.patch.dict('sys.modules', {
-        'oauth2client.contrib.appengine': mock.Mock()})
+        'oauth2client_latest.contrib.appengine': mock.Mock()})
     def test_it(self):
-        gae_mod = sys.modules['oauth2client.contrib.appengine']
+        gae_mod = sys.modules['oauth2client_latest.contrib.appengine']
         gae_mod.AppAssertionCredentials = creds_kls = mock.Mock()
         creds_kls.return_value = object()
         credentials = client._get_application_default_credential_GAE()
@@ -2239,9 +2239,9 @@ class Test__get_application_default_credential_GAE(unittest2.TestCase):
 class Test__get_application_default_credential_GCE(unittest2.TestCase):
 
     @mock.patch.dict('sys.modules', {
-        'oauth2client.contrib.gce': mock.Mock()})
+        'oauth2client_latest.contrib.gce': mock.Mock()})
     def test_it(self):
-        gce_mod = sys.modules['oauth2client.contrib.gce']
+        gce_mod = sys.modules['oauth2client_latest.contrib.gce']
         gce_mod.AppAssertionCredentials = creds_kls = mock.Mock()
         creds_kls.return_value = object()
         credentials = client._get_application_default_credential_GCE()
@@ -2297,7 +2297,7 @@ class TestDeviceFlowInfo(unittest2.TestCase):
         with self.assertRaises(client.OAuth2DeviceCodeError):
             client.DeviceFlowInfo.FromResponse(response)
 
-    @mock.patch('oauth2client.client._UTCNOW')
+    @mock.patch('oauth2client_latest.client._UTCNOW')
     def test_FromResponse_with_expires_in(self, utcnow):
         expires_in = 23
         response = {

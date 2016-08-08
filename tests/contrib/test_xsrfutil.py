@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for oauth2client.contrib.xsrfutil."""
+"""Tests for oauth2client_latest.contrib.xsrfutil."""
 
 import base64
 
 import mock
 import unittest2
 
-from oauth2client import _helpers
-from oauth2client.contrib import xsrfutil
+from oauth2client_latest import _helpers
+from oauth2client_latest.contrib import xsrfutil
 
 # Jan 17 2008, 5:40PM
 TEST_KEY = b'test key'
@@ -51,7 +51,7 @@ class Test_generate_token(unittest2.TestCase):
         digest = b'foobar'
         digester = mock.MagicMock()
         digester.digest = mock.MagicMock(name='digest', return_value=digest)
-        with mock.patch('oauth2client.contrib.xsrfutil.hmac') as hmac:
+        with mock.patch('oauth2client_latest.contrib.xsrfutil.hmac') as hmac:
             hmac.new = mock.MagicMock(name='new', return_value=digester)
             token = xsrfutil.generate_token(TEST_KEY,
                                             TEST_USER_ID_1,
@@ -80,10 +80,10 @@ class Test_generate_token(unittest2.TestCase):
         curr_time = 1440449755.74
         digester = mock.MagicMock()
         digester.digest = mock.MagicMock(name='digest', return_value=digest)
-        with mock.patch('oauth2client.contrib.xsrfutil.hmac') as hmac:
+        with mock.patch('oauth2client_latest.contrib.xsrfutil.hmac') as hmac:
             hmac.new = mock.MagicMock(name='new', return_value=digester)
 
-            with mock.patch('oauth2client.contrib.xsrfutil.time') as time:
+            with mock.patch('oauth2client_latest.contrib.xsrfutil.time') as time:
                 time.time = mock.MagicMock(name='time', return_value=curr_time)
                 # when= is omitted
                 token = xsrfutil.generate_token(TEST_KEY,
@@ -141,7 +141,7 @@ class Test_validate_token(unittest2.TestCase):
 
         key = user_id = None
         token = base64.b64encode(_helpers._to_bytes(str(token_time)))
-        with mock.patch('oauth2client.contrib.xsrfutil.time') as time:
+        with mock.patch('oauth2client_latest.contrib.xsrfutil.time') as time:
             time.time = mock.MagicMock(name='time', return_value=curr_time)
             self.assertFalse(xsrfutil.validate_token(key, token, user_id))
             time.time.assert_called_once_with()
@@ -168,7 +168,7 @@ class Test_validate_token(unittest2.TestCase):
         # Make sure the token length comparison will fail.
         self.assertNotEqual(len(token), len(generated_token))
 
-        with mock.patch('oauth2client.contrib.xsrfutil.generate_token',
+        with mock.patch('oauth2client_latest.contrib.xsrfutil.generate_token',
                         return_value=generated_token) as gen_tok:
             self.assertFalse(xsrfutil.validate_token(key, token, user_id,
                                                      current_time=curr_time,
@@ -192,7 +192,7 @@ class Test_validate_token(unittest2.TestCase):
         self.assertEqual(len(token), len(generated_token))
         self.assertNotEqual(token, generated_token)
 
-        with mock.patch('oauth2client.contrib.xsrfutil.generate_token',
+        with mock.patch('oauth2client_latest.contrib.xsrfutil.generate_token',
                         return_value=generated_token) as gen_tok:
             self.assertFalse(xsrfutil.validate_token(key, token, user_id,
                                                      current_time=curr_time,
@@ -209,7 +209,7 @@ class Test_validate_token(unittest2.TestCase):
         user_id = object()
         action_id = object()
         token = base64.b64encode(_helpers._to_bytes(str(token_time)))
-        with mock.patch('oauth2client.contrib.xsrfutil.generate_token',
+        with mock.patch('oauth2client_latest.contrib.xsrfutil.generate_token',
                         return_value=token) as gen_tok:
             self.assertTrue(xsrfutil.validate_token(key, token, user_id,
                                                     current_time=curr_time,

@@ -16,8 +16,8 @@ import httplib2
 import mock
 import unittest2
 
-from oauth2client import client
-from oauth2client import transport
+from oauth2client_latest import client
+from oauth2client_latest import transport
 
 
 class TestMemoryCache(unittest2.TestCase):
@@ -41,7 +41,7 @@ class Test_get_cached_http(unittest2.TestCase):
 
     def test_value(self):
         cache = object()
-        with mock.patch('oauth2client.transport._CACHED_HTTP', new=cache):
+        with mock.patch('oauth2client_latest.transport._CACHED_HTTP', new=cache):
             result = transport.get_cached_http()
         self.assertIs(result, cache)
 

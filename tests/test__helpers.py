@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Unit tests for oauth2client._helpers."""
+"""Unit tests for oauth2client_latest._helpers."""
 
 import mock
 import unittest2
 
-from oauth2client import _helpers
+from oauth2client_latest import _helpers
 
 
 __author__ = 'jcgregorio@google.com (Joe Gregorio)'
@@ -59,7 +59,7 @@ class PositionalTests(unittest2.TestCase):
         with self.assertRaises(TypeError):
             function3(1, 2)
 
-    @mock.patch('oauth2client._helpers.logger')
+    @mock.patch('oauth2client_latest._helpers.logger')
     def test_enforcement_warning(self, mock_logger):
         _helpers.positional_parameters_enforcement = (
             _helpers.POSITIONAL_WARNING)
@@ -71,7 +71,7 @@ class PositionalTests(unittest2.TestCase):
         self.assertTrue(function(1, 2))
         self.assertTrue(mock_logger.warning.called)
 
-    @mock.patch('oauth2client._helpers.logger')
+    @mock.patch('oauth2client_latest._helpers.logger')
     def test_enforcement_ignore(self, mock_logger):
         _helpers.positional_parameters_enforcement = _helpers.POSITIONAL_IGNORE
 

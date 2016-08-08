@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Unit tests for JWT related methods in oauth2client."""
+"""Unit tests for JWT related methods in oauth2client_latest."""
 
 import os
 import tempfile
@@ -21,11 +21,11 @@ import time
 import mock
 import unittest2
 
-from oauth2client import _helpers
-from oauth2client import client
-from oauth2client import crypt
-from oauth2client import file
-from oauth2client import service_account
+from oauth2client_latest import _helpers
+from oauth2client_latest import client
+from oauth2client_latest import crypt
+from oauth2client_latest import file
+from oauth2client_latest import service_account
 from .http_mock import HttpMockSequence
 
 
@@ -134,7 +134,7 @@ class CryptTests(unittest2.TestCase):
             ({'status': '200'}, datafile('certs.json')),
         ])
 
-        with mock.patch('oauth2client.transport._CACHED_HTTP', new=http):
+        with mock.patch('oauth2client_latest.transport._CACHED_HTTP', new=http):
             contents = client.verify_id_token(
                 jwt, 'some_audience_address@testing.gserviceaccount.com')
 

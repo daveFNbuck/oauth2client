@@ -24,20 +24,20 @@ if [[ "${TRAVIS}" == "true" ]]; then
          [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then
     echo "Running in Travis during merge, decrypting stored key file."
     # Convert encrypted JSON key file into decrypted file to be used.
-    openssl aes-256-cbc -K ${OAUTH2CLIENT_KEY} \
-        -iv ${OAUTH2CLIENT_IV} \
+    openssl aes-256-cbc -K ${oauth2client_latest_KEY} \
+        -iv ${oauth2client_latest_IV} \
         -in tests/data/key.json.enc \
-        -out ${OAUTH2CLIENT_TEST_JSON_KEY_PATH} -d
+        -out ${oauth2client_latest_TEST_JSON_KEY_PATH} -d
     # Convert encrypted P12 key file into decrypted file to be used.
-    openssl aes-256-cbc -K ${OAUTH2CLIENT_KEY} \
-        -iv ${OAUTH2CLIENT_IV} \
+    openssl aes-256-cbc -K ${oauth2client_latest_KEY} \
+        -iv ${oauth2client_latest_IV} \
         -in tests/data/key.p12.enc \
-        -out ${OAUTH2CLIENT_TEST_P12_KEY_PATH} -d
+        -out ${oauth2client_latest_TEST_P12_KEY_PATH} -d
     # Convert encrypted User JSON key file into decrypted file to be used.
-    openssl aes-256-cbc -K ${OAUTH2CLIENT_KEY} \
-        -iv ${OAUTH2CLIENT_IV} \
+    openssl aes-256-cbc -K ${oauth2client_latest_KEY} \
+        -iv ${oauth2client_latest_IV} \
         -in tests/data/user-key.json.enc \
-        -out ${OAUTH2CLIENT_TEST_USER_KEY_PATH} -d
+        -out ${oauth2client_latest_TEST_USER_KEY_PATH} -d
   else
     echo "Running in Travis during non-merge to master, doing nothing."
     exit

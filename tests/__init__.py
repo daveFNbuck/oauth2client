@@ -12,7 +12,7 @@
 
 """Test package set-up."""
 
-from oauth2client import _helpers
+from oauth2client_latest import _helpers
 
 __author__ = 'afshar@google.com (Ali Afshar)'
 

@@ -6,7 +6,7 @@ from googleapiclient.discovery import build
 import httplib2
 from six.moves import input
 
-from oauth2client.client import OAuth2WebServerFlow
+from oauth2client_latest.client import OAuth2WebServerFlow
 
 CLIENT_ID = "some+client+id"
 CLIENT_SECRET = "some+client+secret"

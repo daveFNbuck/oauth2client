@@ -1,7 +1,7 @@
-oauth2client.transport module
+oauth2client_latest.transport module
 =============================
 
-.. automodule:: oauth2client.transport
+.. automodule:: oauth2client_latest.transport
     :members:
     :undoc-members:
     :show-inheritance:

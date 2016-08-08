@@ -1,6 +1,6 @@
 # Build artifacts
 *.py[cod]
-oauth2client.egg-info/
+oauth2client_latest.egg-info/
 build/
 dist/
 

@@ -23,7 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'oauth2client.contrib.django_util',
+    'oauth2client_latest.contrib.django_util',
     'tests.contrib.django_util.apps.DjangoOrmTestApp',
 ]
 

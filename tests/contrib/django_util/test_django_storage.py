@@ -21,10 +21,10 @@ from django.db import models
 import mock
 import unittest2
 
-from oauth2client import GOOGLE_TOKEN_URI
-from oauth2client.client import OAuth2Credentials
-from oauth2client.contrib.django_util.models import CredentialsField
-from oauth2client.contrib.django_util.storage import (
+from oauth2client_latest import GOOGLE_TOKEN_URI
+from oauth2client_latest.client import OAuth2Credentials
+from oauth2client_latest.contrib.django_util.models import CredentialsField
+from oauth2client_latest.contrib.django_util.storage import (
     DjangoORMStorage as Storage)
 
 

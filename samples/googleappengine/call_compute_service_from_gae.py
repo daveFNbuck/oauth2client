@@ -4,7 +4,7 @@
 from googleapiclient.discovery import build
 import webapp2
 
-from oauth2client.client import GoogleCredentials
+from oauth2client_latest.client import GoogleCredentials
 
 
 PROJECT = 'bamboo-machine-422'  # Provide your own GCE project here

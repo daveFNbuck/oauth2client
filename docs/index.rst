@@ -1,9 +1,9 @@
-oauth2client
+oauth2client_latest
 ============
 
 *making OAuth2 just a little less painful*
 
-``oauth2client`` makes it easy to interact with OAuth2-protected resources,
+``oauth2client_latest`` makes it easy to interact with OAuth2-protected resources,
 especially those related to Google APIs. You can also start with `general
 information about using OAuth2 with Google APIs
 <https://developers.google.com/accounts/docs/OAuth2>`_.
@@ -15,14 +15,14 @@ We recommend installing via ``pip``:
 
 .. code-block:: bash
 
-    $ pip install --upgrade oauth2client
+    $ pip install --upgrade oauth2client_latest
 
 You can also install from source:
 
 .. code-block:: bash
 
-    $ git clone https://github.com/google/oauth2client
-    $ cd oauth2client
+    $ git clone https://github.com/google/oauth2client_latest
+    $ cd oauth2client_latest
     $ python setup.py install
 
 Using ``pypy``
@@ -77,10 +77,10 @@ Downloads
 ^^^^^^^^^
 
 * `Most recent release tarball
-  <https://github.com/google/oauth2client/tarball/master>`_
+  <https://github.com/google/oauth2client_latest/tarball/master>`_
 * `Most recent release zipfile
-  <https://github.com/google/oauth2client/zipball/master>`_
-* `Complete release list <https://github.com/google/oauth2client/releases>`_
+  <https://github.com/google/oauth2client_latest/zipball/master>`_
+* `Complete release list <https://github.com/google/oauth2client_latest/releases>`_
 
 Library Documentation
 ---------------------
@@ -96,13 +96,13 @@ Please see the `contributing page`_ for more information.
 In particular, we love pull requests -- but please make sure to sign the
 contributor license agreement.
 
-.. _contributing page: https://github.com/google/oauth2client/blob/master/CONTRIBUTING.md
+.. _contributing page: https://github.com/google/oauth2client_latest/blob/master/CONTRIBUTING.md
 
 .. toctree::
    :maxdepth: 1
    :hidden:
 
-   source/oauth2client
+   source/oauth2client_latest
 
 Supported Python Versions
 -------------------------
@@ -110,7 +110,7 @@ Supported Python Versions
 We support Python 2.6, 2.7, 3.3+. (Whatever this file says, the truth is
 always represented by our `tox.ini`_).
 
-.. _tox.ini: https://github.com/google/oauth2client/blob/master/tox.ini
+.. _tox.ini: https://github.com/google/oauth2client_latest/blob/master/tox.ini
 
 We explicitly decided to support Python 3 beginning with version
 3.3. Reasons for this include:

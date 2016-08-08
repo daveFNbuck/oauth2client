@@ -24,10 +24,10 @@ import six.moves.http_client as httplib
 import six.moves.urllib.parse as urlparse
 import unittest2
 
-import oauth2client
-from oauth2client import client
-from oauth2client import clientsecrets
-from oauth2client.contrib import flask_util
+import oauth2client_latest
+from oauth2client_latest import client
+from oauth2client_latest import clientsecrets
+from oauth2client_latest.contrib import flask_util
 from .. import http_mock
 
 
@@ -63,7 +63,7 @@ class FlaskOAuth2Tests(unittest2.TestCase):
             'client_secretz',
             'refresh_tokenz',
             datetime.datetime.utcnow() + datetime.timedelta(seconds=3600),
-            oauth2client.GOOGLE_TOKEN_URI,
+            oauth2client_latest.GOOGLE_TOKEN_URI,
             'Test',
             id_token={
                 'sub': '123',
@@ -82,7 +82,7 @@ class FlaskOAuth2Tests(unittest2.TestCase):
             clientsecrets.TYPE_WEB,
             {'client_id': 'id', 'client_secret': 'secret'})
 
-        with mock.patch('oauth2client.clientsecrets.loadfile',
+        with mock.patch('oauth2client_latest.clientsecrets.loadfile',
                         return_value=return_val):
 
             oauth2 = flask_util.UserOAuth2(
@@ -115,7 +115,7 @@ class FlaskOAuth2Tests(unittest2.TestCase):
             'other',
             {'client_id': 'id', 'client_secret': 'secret'})
 
-        with mock.patch('oauth2client.clientsecrets.loadfile',
+        with mock.patch('oauth2client_latest.clientsecrets.loadfile',
                         return_value=return_val):
             with self.assertRaises(ValueError):
                 flask_util.UserOAuth2(flask.Flask(__name__),
@@ -135,7 +135,7 @@ class FlaskOAuth2Tests(unittest2.TestCase):
             clientsecrets.TYPE_WEB,
             {'client_id': 'id2', 'client_secret': 'secret2'})
 
-        with mock.patch('oauth2client.clientsecrets.loadfile',
+        with mock.patch('oauth2client_latest.clientsecrets.loadfile',
                         return_value=return_val):
 
             app = flask.Flask(__name__)
@@ -186,7 +186,7 @@ class FlaskOAuth2Tests(unittest2.TestCase):
             q = urlparse.parse_qs(location.split('?', 1)[1])
             state = json.loads(q['state'][0])
 
-            self.assertIn(oauth2client.GOOGLE_AUTH_URI, location)
+            self.assertIn(oauth2client_latest.GOOGLE_AUTH_URI, location)
             self.assertNotIn(self.oauth2.client_secret, location)
             self.assertIn(self.oauth2.client_id, q['client_id'])
             self.assertEqual(
@@ -227,7 +227,7 @@ class FlaskOAuth2Tests(unittest2.TestCase):
         self.oauth2.storage = mock.Mock()
         with self.app.test_client() as client:
             with mock.patch(
-                    'oauth2client.transport.get_http_object') as new_http:
+                    'oauth2client_latest.transport.get_http_object') as new_http:
                 # Set-up mock.
                 http = http_mock.HttpMock(data=DEFAULT_RESP)
                 new_http.return_value = http
@@ -285,7 +285,7 @@ class FlaskOAuth2Tests(unittest2.TestCase):
             state = self._setup_callback_state(client)
 
             with mock.patch(
-                    'oauth2client.transport.get_http_object') as new_http:
+                    'oauth2client_latest.transport.get_http_object') as new_http:
                 # Set-up mock.
                 new_http.return_value = http_mock.HttpMock(
                     headers={'status': httplib.INTERNAL_SERVER_ERROR},
@@ -346,7 +346,7 @@ class FlaskOAuth2Tests(unittest2.TestCase):
             self.assertEqual(self.oauth2.email, 'user@example.com')
             self.assertTrue(self.oauth2.http())
 
-    @mock.patch('oauth2client.client._UTCNOW')
+    @mock.patch('oauth2client_latest.client._UTCNOW')
     def test_with_expired_credentials(self, utcnow):
         utcnow.return_value = datetime.datetime(1990, 5, 29)
 
@@ -398,7 +398,7 @@ class FlaskOAuth2Tests(unittest2.TestCase):
 
         # Expired credentials with refresh token, should allow.
         credentials.token_expiry = datetime.datetime(1990, 5, 28)
-        with mock.patch('oauth2client.client._UTCNOW') as utcnow:
+        with mock.patch('oauth2client_latest.client._UTCNOW') as utcnow:
             utcnow.return_value = datetime.datetime(1990, 5, 29)
 
             with self.app.test_client() as client:
@@ -412,7 +412,7 @@ class FlaskOAuth2Tests(unittest2.TestCase):
 
         # Expired credentials without a refresh token, should redirect.
         credentials.refresh_token = None
-        with mock.patch('oauth2client.client._UTCNOW') as utcnow:
+        with mock.patch('oauth2client_latest.client._UTCNOW') as utcnow:
             utcnow.return_value = datetime.datetime(1990, 5, 29)
 
             with self.app.test_client() as client:
@@ -492,7 +492,7 @@ class FlaskOAuth2Tests(unittest2.TestCase):
     def test_incremental_auth_exchange(self):
         self._create_incremental_auth_app()
 
-        with mock.patch('oauth2client.transport.get_http_object') as new_http:
+        with mock.patch('oauth2client_latest.transport.get_http_object') as new_http:
             # Set-up mock.
             new_http.return_value = http_mock.HttpMock(data=DEFAULT_RESP)
             # Run tests.

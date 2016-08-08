@@ -37,10 +37,10 @@ import unittest2
 import webapp2
 from webtest import TestApp
 
-import oauth2client
-from oauth2client import client
-from oauth2client import clientsecrets
-from oauth2client.contrib import appengine
+import oauth2client_latest
+from oauth2client_latest import client
+from oauth2client_latest import clientsecrets
+from oauth2client_latest.contrib import appengine
 from .. import http_mock
 
 __author__ = 'jcgregorio@google.com (Joe Gregorio)'
@@ -321,7 +321,7 @@ class CredentialsPropertyTest(unittest2.TestCase):
         user_agent = 'refresh_checker/1.0'
         self.credentials = client.OAuth2Credentials(
             access_token, client_id, client_secret,
-            refresh_token, token_expiry, oauth2client.GOOGLE_TOKEN_URI,
+            refresh_token, token_expiry, oauth2client_latest.GOOGLE_TOKEN_URI,
             user_agent)
 
     def tearDown(self):
@@ -384,7 +384,7 @@ class StorageByKeyNameTest(unittest2.TestCase):
         user_agent = 'refresh_checker/1.0'
         self.credentials = client.OAuth2Credentials(
             access_token, client_id, client_secret,
-            refresh_token, token_expiry, oauth2client.GOOGLE_TOKEN_URI,
+            refresh_token, token_expiry, oauth2client_latest.GOOGLE_TOKEN_URI,
             user_agent)
 
     def tearDown(self):
@@ -643,7 +643,7 @@ class DecoratorTests(unittest2.TestCase):
             app.router.match_routes[0].handler.__name__,
             'OAuth2Handler')
 
-    @mock.patch('oauth2client.transport.get_http_object')
+    @mock.patch('oauth2client_latest.transport.get_http_object')
     def test_required(self, new_http):
         new_http.return_value = http_mock.HttpMock(data=DEFAULT_RESP)
         # An initial request to an oauth_required decorated path should be a
@@ -729,7 +729,7 @@ class DecoratorTests(unittest2.TestCase):
         # Check the mocks were called.
         new_http.assert_called_once_with()
 
-    @mock.patch('oauth2client.transport.get_http_object')
+    @mock.patch('oauth2client_latest.transport.get_http_object')
     def test_storage_delete(self, new_http):
         new_http.return_value = http_mock.HttpMock(data=DEFAULT_RESP)
         # An initial request to an oauth_required decorated path should be a
@@ -770,7 +770,7 @@ class DecoratorTests(unittest2.TestCase):
         # Check the mocks were called.
         new_http.assert_called_once_with()
 
-    @mock.patch('oauth2client.transport.get_http_object')
+    @mock.patch('oauth2client_latest.transport.get_http_object')
     def test_aware(self, new_http):
         new_http.return_value = http_mock.HttpMock(data=DEFAULT_RESP)
         # An initial request to an oauth_aware decorated path should
@@ -862,7 +862,7 @@ class DecoratorTests(unittest2.TestCase):
         self.decorator._token_response_param = 'foobar'
         self.test_required()
 
-    @mock.patch('oauth2client.transport.get_http_object')
+    @mock.patch('oauth2client_latest.transport.get_http_object')
     def test_decorator_from_client_secrets(self, new_http):
         new_http.return_value = http_mock.HttpMock(data=DEFAULT_RESP)
         # Execute test after setting up mock.
@@ -889,7 +889,7 @@ class DecoratorTests(unittest2.TestCase):
 
     def test_decorator_from_client_secrets_toplevel(self):
         decorator_patch = mock.patch(
-            'oauth2client.contrib.appengine.OAuth2DecoratorFromClientSecrets')
+            'oauth2client_latest.contrib.appengine.OAuth2DecoratorFromClientSecrets')
 
         with decorator_patch as decorator_mock:
             filename = datafile('client_secrets.json')
@@ -903,13 +903,13 @@ class DecoratorTests(unittest2.TestCase):
 
     def test_decorator_from_client_secrets_bad_type(self):
         # NOTE: this code path is not currently reachable, as the only types
-        # that oauth2client.clientsecrets can load is web and installed, so
+        # that oauth2client_latest.clientsecrets can load is web and installed, so
         # this test forces execution of this code path. Despite not being
         # normally reachable, this should remain in case future types of
         # credentials are added.
 
         loadfile_patch = mock.patch(
-            'oauth2client.contrib.appengine.clientsecrets.loadfile')
+            'oauth2client_latest.contrib.appengine.clientsecrets.loadfile')
         with loadfile_patch as loadfile_mock:
             loadfile_mock.return_value = ('badtype', None)
             with self.assertRaises(clientsecrets.InvalidClientSecretsError):
@@ -982,7 +982,7 @@ class DecoratorTests(unittest2.TestCase):
         # Test that the decorator works with the absense of a revoke_uri in
         # the client secrets.
         loadfile_patch = mock.patch(
-            'oauth2client.contrib.appengine.clientsecrets.loadfile')
+            'oauth2client_latest.contrib.appengine.clientsecrets.loadfile')
         with loadfile_patch as loadfile_mock:
             loadfile_mock.return_value = (clientsecrets.TYPE_WEB, {
                 "client_id": "foo_client_id",
@@ -997,11 +997,11 @@ class DecoratorTests(unittest2.TestCase):
                 'doesntmatter.json',
                 scope=['foo_scope', 'bar_scope'])
 
-        self.assertEqual(decorator._revoke_uri, oauth2client.GOOGLE_REVOKE_URI)
+        self.assertEqual(decorator._revoke_uri, oauth2client_latest.GOOGLE_REVOKE_URI)
         # This is never set, but it's consistent with other tests.
         self.assertFalse(decorator._in_error)
 
-    @mock.patch('oauth2client.transport.get_http_object')
+    @mock.patch('oauth2client_latest.transport.get_http_object')
     def test_invalid_state(self, new_http):
         new_http.return_value = http_mock.HttpMock(data=DEFAULT_RESP)
         # Execute test after setting up mock.
@@ -1040,13 +1040,13 @@ class DecoratorXsrfSecretTests(unittest2.TestCase):
 
         # Secret shouldn't change if memcache goes away.
         memcache.delete(appengine.XSRF_MEMCACHE_ID,
-                        namespace=appengine.OAUTH2CLIENT_NAMESPACE)
+                        namespace=appengine.oauth2client_latest_NAMESPACE)
         secret3 = appengine.xsrf_secret_key()
         self.assertEqual(secret2, secret3)
 
         # Secret should change if both memcache and the model goes away.
         memcache.delete(appengine.XSRF_MEMCACHE_ID,
-                        namespace=appengine.OAUTH2CLIENT_NAMESPACE)
+                        namespace=appengine.oauth2client_latest_NAMESPACE)
         model = appengine.SiteXsrfSecretKey.get_or_insert('site')
         model.delete()
 

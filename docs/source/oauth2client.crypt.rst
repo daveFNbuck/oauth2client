@@ -1,7 +1,7 @@
-oauth2client.crypt module
+oauth2client_latest.crypt module
 =========================
 
-.. automodule:: oauth2client.crypt
+.. automodule:: oauth2client_latest.crypt
     :members:
     :undoc-members:
     :show-inheritance:

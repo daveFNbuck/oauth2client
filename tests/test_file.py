@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Oauth2client.file tests
+"""oauth2client_latest.file tests
 
-Unit tests for oauth2client.file
+Unit tests for oauth2client_latest.file
 """
 
 import copy
@@ -31,9 +31,9 @@ import six
 from six.moves import http_client
 import unittest2
 
-from oauth2client import _helpers
-from oauth2client import client
-from oauth2client import file
+from oauth2client_latest import _helpers
+from oauth2client_latest import client
+from oauth2client_latest import file
 from .http_mock import HttpMockSequence
 
 try:
@@ -44,11 +44,11 @@ except:  # pragma: NO COVER
 
 __author__ = 'jcgregorio@google.com (Joe Gregorio)'
 
-_filehandle, FILENAME = tempfile.mkstemp('oauth2client_test.data')
+_filehandle, FILENAME = tempfile.mkstemp('oauth2client_latest_test.data')
 os.close(_filehandle)
 
 
-class OAuth2ClientFileTests(unittest2.TestCase):
+class oauth2client_latestFileTests(unittest2.TestCase):
 
     def tearDown(self):
         try:

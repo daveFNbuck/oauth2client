@@ -1,7 +1,7 @@
-oauth2client.contrib.appengine module
+oauth2client_latest.contrib.appengine module
 =====================================
 
-.. automodule:: oauth2client.contrib.appengine
+.. automodule:: oauth2client_latest.contrib.appengine
     :members:
     :undoc-members:
     :show-inheritance:

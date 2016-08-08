@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Unit tests for oauth2client.contrib.dictionary_storage"""
+"""Unit tests for oauth2client_latest.contrib.dictionary_storage"""
 
 import unittest2
 
-import oauth2client
-from oauth2client import client
-from oauth2client.contrib import dictionary_storage
+import oauth2client_latest
+from oauth2client_latest import client
+from oauth2client_latest.contrib import dictionary_storage
 
 
 def _generate_credentials(scopes=None):
@@ -28,7 +28,7 @@ def _generate_credentials(scopes=None):
         'client_secretz',
         'refresh_tokenz',
         '3600',
-        oauth2client.GOOGLE_TOKEN_URI,
+        oauth2client_latest.GOOGLE_TOKEN_URI,
         'Test',
         id_token={
             'sub': '123',

@@ -7,7 +7,7 @@ Contributing
 1.  Make sure that your commit messages clearly describe the changes.
 1.  [Send][12] a pull request.
 
-Here are some guidelines for hacking on `oauth2client`.
+Here are some guidelines for hacking on `oauth2client_latest`.
 
 Before writing code, file an issue
 ----------------------------------
@@ -17,7 +17,7 @@ else is already working on your idea, your approach is not quite right, or that
 the functionality exists already. The ticket you file in the issue tracker will
 be used to hash that all out.
 
-Fork `oauth2client`
+Fork `oauth2client_latest`
 -------------------
 
 We will use GitHub's mechanism for [forking][8] repositories and making pull
@@ -34,34 +34,34 @@ Make the pull request
 ---------------------
 
 Once you have made all your changes, tests, and updated the documentation,
-make a pull request to move everything back into the main `oauth2client`
+make a pull request to move everything back into the main `oauth2client_latest`
 repository. Be sure to reference the original issue in the pull request.
 Expect some back-and-forth with regards to style and compliance of these
 rules. In particular:
-* `oauth2client` follows the [Google Python Style Guide][GooglePythonStyle].
+* `oauth2client_latest` follows the [Google Python Style Guide][GooglePythonStyle].
 * Follow [these guidelines][GitCommitRules] when authoring your commit message.
 
 Using a Development Checkout
 ----------------------------
 
 You’ll have to create a development environment to hack on
-`oauth2client`, using a Git checkout:
+`oauth2client_latest`, using a Git checkout:
 
--   While logged into your GitHub account, navigate to the `oauth2client`
+-   While logged into your GitHub account, navigate to the `oauth2client_latest`
     [repo][1] on GitHub.
--   Fork and clone the `oauth2client` repository to your GitHub account
+-   Fork and clone the `oauth2client_latest` repository to your GitHub account
     by clicking the "Fork" button.
--   Clone your fork of `oauth2client` from your GitHub account to your
+-   Clone your fork of `oauth2client_latest` from your GitHub account to your
     local computer, substituting your account username and specifying
-    the destination as `hack-on-oauth2client`. For example:
+    the destination as `hack-on-oauth2client_latest`. For example:
 
     ```bash
     $ cd ${HOME}
-    $ git clone git@github.com:USERNAME/oauth2client.git hack-on-oauth2client
-    $ cd hack-on-oauth2client
-    $ # Configure remotes such that you can pull changes from the oauth2client
+    $ git clone git@github.com:USERNAME/oauth2client_latest.git hack-on-oauth2client_latest
+    $ cd hack-on-oauth2client_latest
+    $ # Configure remotes such that you can pull changes from the oauth2client_latest
     $ # repository into your local repository.
-    $ git remote add upstream https://github.com:google/oauth2client
+    $ git remote add upstream https://github.com:google/oauth2client_latest
     $ # fetch and merge changes from upstream into master
     $ git fetch upstream
     $ git merge upstream/master
@@ -70,10 +70,10 @@ You’ll have to create a development environment to hack on
 Now your local repo is set up such that you will push changes to your
 GitHub repo, from which you can submit a pull request.
 
--   Create a virtualenv in which to install `oauth2client`:
+-   Create a virtualenv in which to install `oauth2client_latest`:
 
     ```bash
-    $ cd ~/hack-on-oauth2client
+    $ cd ~/hack-on-oauth2client_latest
     $ virtualenv -ppython2.7 env
     ```
 
@@ -86,32 +86,32 @@ GitHub repo, from which you can submit a pull request.
     chooses the Python 2.7 interpreter to be installed.
 
     From here on in within these instructions, the
-    `~/hack-on-oauth2client/env` virtual environment you created above will be
+    `~/hack-on-oauth2client_latest/env` virtual environment you created above will be
     referred to as `$VENV`. To use the instructions in the steps that
-    follow literally, use the `export VENV=~/hack-on-oauth2client/env`
+    follow literally, use the `export VENV=~/hack-on-oauth2client_latest/env`
     command.
 
--   Install `oauth2client` from the checkout into the virtualenv using
+-   Install `oauth2client_latest` from the checkout into the virtualenv using
     `setup.py develop`. Running `setup.py develop` **must** be done while
-    the current working directory is the `oauth2client` checkout
+    the current working directory is the `oauth2client_latest` checkout
     directory:
 
     ```bash
-    $ cd ~/hack-on-oauth2client
+    $ cd ~/hack-on-oauth2client_latest
     $ $VENV/bin/python setup.py develop
     ```
 
 Running Tests
 --------------
 
--   To run all tests for `oauth2client` on a single Python version, run
+-   To run all tests for `oauth2client_latest` on a single Python version, run
     `nosetests` from your development virtualenv (See
     **Using a Development Checkout** above).
 
--   To run the full set of `oauth2client` tests on all platforms, install
+-   To run the full set of `oauth2client_latest` tests on all platforms, install
     [`tox`][2] into a system Python.  The `tox` console script will be
     installed into the scripts location for that Python.  While in the
-    `oauth2client` checkout root directory (it contains `tox.ini`),
+    `oauth2client_latest` checkout root directory (it contains `tox.ini`),
     invoke the `tox` console script.  This will read the `tox.ini` file and
     execute the tests on multiple Python versions and platforms; while it runs,
     it creates a virtualenv for each version/platform combination.  For
@@ -119,7 +119,7 @@ Running Tests
 
     ```bash
     $ sudo pip install tox
-    $ cd ~/hack-on-oauth2client
+    $ cd ~/hack-on-oauth2client_latest
     $ tox
     ```
 
@@ -148,22 +148,22 @@ Running System Tests
 -   System tests will be run against an actual project and so you'll need to
     provide some environment variables to facilitate this.
 
-    -   `OAUTH2CLIENT_TEST_JSON_KEY_PATH`: The path to a service account JSON
+    -   `oauth2client_latest_TEST_JSON_KEY_PATH`: The path to a service account JSON
         key file; see `tests/data/gcloud/application_default_credentials.json`
         as an example. Such a file can be downloaded directly from the
         developer's console by clicking "Generate new JSON key". See private
         key [docs][3] for more details.
-    -   `OAUTH2CLIENT_TEST_P12_KEY_PATH`: The path to a service account
+    -   `oauth2client_latest_TEST_P12_KEY_PATH`: The path to a service account
         P12/PKCS12 key file. You can download this in the same way as a JSON
         key, just select "P12 Key" as your "Key type" when downloading.
-    -   `OAUTH2CLIENT_TEST_P12_KEY_EMAIL`: The service account email
+    -   `oauth2client_latest_TEST_P12_KEY_EMAIL`: The service account email
         corresponding to the P12/PKCS12 key file.
-    -   `OAUTH2CLIENT_TEST_USER_KEY_PATH`: The path to a JSON key file for a
+    -   `oauth2client_latest_TEST_USER_KEY_PATH`: The path to a JSON key file for a
         user. If this is not set, the file created by running
         `gcloud auth login` will be used. See
         `tests/data/gcloud/application_default_credentials_authorized_user.json`
         for an example.
-    -   `OAUTH2CLIENT_TEST_USER_KEY_EMAIL`: The user account email
+    -   `oauth2client_latest_TEST_USER_KEY_EMAIL`: The user account email
         corresponding to the user JSON key file.
 
 -   Examples of these can be found in `scripts/local_test_setup.sample`. We
@@ -189,19 +189,19 @@ License Agreement (CLA):
 You can sign these electronically (just scroll to the bottom). After that,
 we'll be able to accept your pull requests.
 
-[1]: https://github.com/google/oauth2client
+[1]: https://github.com/google/oauth2client_latest
 [2]: https://tox.readthedocs.io/en/latest/
 [3]: https://cloud.google.com/storage/docs/authentication#generating-a-private-key
 [4]: https://developers.google.com/open-source/cla/individual
 [5]: https://developers.google.com/open-source/cla/corporate
 [6]: #contributor-license-agreements
-[7]: https://github.com/google/oauth2client/issues
+[7]: https://github.com/google/oauth2client_latest/issues
 [8]: https://help.github.com/articles/fork-a-repo/
 [9]: #before-writing-code-file-an-issue
-[10]: #fork-oauth2client
+[10]: #fork-oauth2client_latest
 [11]: #include-tests
 [12]: #make-the-pull-request
-[13]: https://oauth2client.readthedocs.io/en/latest/#using-pypy
+[13]: https://oauth2client_latest.readthedocs.io/en/latest/#using-pypy
 [14]: https://docs.djangoproject.com/en/1.7/faq/install/#what-python-version-can-i-use-with-django
 [15]: https://docs.djangoproject.com/en/1.9/faq/install/#what-python-version-can-i-use-with-django
 [GooglePythonStyle]: https://google.github.io/styleguide/pyguide.html

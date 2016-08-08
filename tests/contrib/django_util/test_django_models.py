@@ -24,9 +24,9 @@ from tests.contrib.django_util.models import CredentialsModel
 
 import unittest2
 
-from oauth2client import _helpers
-from oauth2client.client import Credentials
-from oauth2client.contrib.django_util.models import CredentialsField
+from oauth2client_latest import _helpers
+from oauth2client_latest.client import Credentials
+from oauth2client_latest.contrib.django_util.models import CredentialsField
 
 
 class TestCredentialsField(unittest2.TestCase):

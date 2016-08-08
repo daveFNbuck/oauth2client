@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for oauth2client.contrib.keyring_storage."""
+"""Tests for oauth2client_latest.contrib.keyring_storage."""
 
 import datetime
 import threading
@@ -21,9 +21,9 @@ import keyring
 import mock
 import unittest2
 
-import oauth2client
-from oauth2client import client
-from oauth2client.contrib import keyring_storage
+import oauth2client_latest
+from oauth2client_latest import client
+from oauth2client_latest.contrib import keyring_storage
 
 
 __author__ = 'jcgregorio@google.com (Joe Gregorio)'
@@ -64,7 +64,7 @@ class KeyringStorageTests(unittest2.TestCase):
         with mock.patch.object(keyring, 'get_password',
                                return_value=mock_content,
                                autospec=True) as get_password:
-            class_name = 'oauth2client.client.Credentials'
+            class_name = 'oauth2client_latest.client.Credentials'
             with mock.patch(class_name) as MockCreds:
                 MockCreds.new_from_json = new_from_json = mock.MagicMock(
                     name='new_from_json', return_value=mock_return_creds)
@@ -129,7 +129,7 @@ class KeyringStorageTests(unittest2.TestCase):
 
         credentials = client.OAuth2Credentials(
             access_token, client_id, client_secret,
-            refresh_token, token_expiry, oauth2client.GOOGLE_TOKEN_URI,
+            refresh_token, token_expiry, oauth2client_latest.GOOGLE_TOKEN_URI,
             user_agent)
 
         # Setting autospec on a mock with an iterable side_effect is

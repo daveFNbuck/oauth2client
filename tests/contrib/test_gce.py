@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Unit tests for oauth2client.contrib.gce."""
+"""Unit tests for oauth2client_latest.contrib.gce."""
 
 import datetime
 import json
@@ -22,8 +22,8 @@ from six.moves import http_client
 from tests.contrib.test_metadata import request_mock
 import unittest2
 
-from oauth2client import client
-from oauth2client.contrib import gce
+from oauth2client_latest import client
+from oauth2client_latest.contrib import gce
 
 __author__ = 'jcgregorio@google.com (Joe Gregorio)'
 
@@ -61,10 +61,10 @@ class AppAssertionCredentialsTests(unittest2.TestCase):
         with self.assertRaises(NotImplementedError):
             gce.AppAssertionCredentials.from_json({})
 
-    @mock.patch('oauth2client.contrib._metadata.get_token',
+    @mock.patch('oauth2client_latest.contrib._metadata.get_token',
                 side_effect=[('A', datetime.datetime.min),
                              ('B', datetime.datetime.max)])
-    @mock.patch('oauth2client.contrib._metadata.get_service_account_info',
+    @mock.patch('oauth2client_latest.contrib._metadata.get_service_account_info',
                 return_value=SERVICE_ACCOUNT_INFO)
     def test_refresh_token(self, get_info, get_token):
         http_request = mock.MagicMock()
@@ -111,7 +111,7 @@ class AppAssertionCredentialsTests(unittest2.TestCase):
         with self.assertRaises(NotImplementedError):
             credentials.sign_blob(b'blob')
 
-    @mock.patch('oauth2client.contrib._metadata.get_service_account_info',
+    @mock.patch('oauth2client_latest.contrib._metadata.get_service_account_info',
                 return_value=SERVICE_ACCOUNT_INFO)
     def test_retrieve_scopes(self, metadata):
         http_request = mock.MagicMock()
@@ -127,7 +127,7 @@ class AppAssertionCredentialsTests(unittest2.TestCase):
         metadata.assert_called_once_with(http_request,
                                          service_account='default')
 
-    @mock.patch('oauth2client.contrib._metadata.get_service_account_info',
+    @mock.patch('oauth2client_latest.contrib._metadata.get_service_account_info',
                 side_effect=http_client.HTTPException('No Such Email'))
     def test_retrieve_scopes_bad_email(self, metadata):
         http_request = mock.MagicMock()

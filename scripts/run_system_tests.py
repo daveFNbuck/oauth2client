@@ -18,16 +18,16 @@ import os
 import httplib2
 from six.moves import http_client
 
-import oauth2client
-from oauth2client import client
-from oauth2client.service_account import ServiceAccountCredentials
+import oauth2client_latest
+from oauth2client_latest import client
+from oauth2client_latest.service_account import ServiceAccountCredentials
 
 
-JSON_KEY_PATH = os.getenv('OAUTH2CLIENT_TEST_JSON_KEY_PATH')
-P12_KEY_PATH = os.getenv('OAUTH2CLIENT_TEST_P12_KEY_PATH')
-P12_KEY_EMAIL = os.getenv('OAUTH2CLIENT_TEST_P12_KEY_EMAIL')
-USER_KEY_PATH = os.getenv('OAUTH2CLIENT_TEST_USER_KEY_PATH')
-USER_KEY_EMAIL = os.getenv('OAUTH2CLIENT_TEST_USER_KEY_EMAIL')
+JSON_KEY_PATH = os.getenv('oauth2client_latest_TEST_JSON_KEY_PATH')
+P12_KEY_PATH = os.getenv('oauth2client_latest_TEST_P12_KEY_PATH')
+P12_KEY_EMAIL = os.getenv('oauth2client_latest_TEST_P12_KEY_EMAIL')
+USER_KEY_PATH = os.getenv('oauth2client_latest_TEST_USER_KEY_PATH')
+USER_KEY_EMAIL = os.getenv('oauth2client_latest_TEST_USER_KEY_EMAIL')
 
 SCOPE = ('https://www.googleapis.com/auth/plus.login',
          'https://www.googleapis.com/auth/plus.me',
@@ -41,11 +41,11 @@ def _require_environ():
             P12_KEY_EMAIL is None or USER_KEY_PATH is None or
             USER_KEY_EMAIL is None):
         raise EnvironmentError('Expected environment variables to be set:',
-                               'OAUTH2CLIENT_TEST_JSON_KEY_PATH',
-                               'OAUTH2CLIENT_TEST_P12_KEY_PATH',
-                               'OAUTH2CLIENT_TEST_P12_KEY_EMAIL',
-                               'OAUTH2CLIENT_TEST_USER_KEY_PATH',
-                               'OAUTH2CLIENT_TEST_USER_KEY_EMAIL')
+                               'oauth2client_latest_TEST_JSON_KEY_PATH',
+                               'oauth2client_latest_TEST_P12_KEY_PATH',
+                               'oauth2client_latest_TEST_P12_KEY_EMAIL',
+                               'oauth2client_latest_TEST_USER_KEY_PATH',
+                               'oauth2client_latest_TEST_USER_KEY_EMAIL')
 
     if not os.path.isfile(JSON_KEY_PATH):
         raise EnvironmentError(JSON_KEY_PATH, 'is not a file')
@@ -90,7 +90,7 @@ def run_user_json():
         client_secret=client_credentials['client_secret'],
         refresh_token=client_credentials['refresh_token'],
         token_expiry=None,
-        token_uri=oauth2client.GOOGLE_TOKEN_URI,
+        token_uri=oauth2client_latest.GOOGLE_TOKEN_URI,
         user_agent='Python client library',
     )
 

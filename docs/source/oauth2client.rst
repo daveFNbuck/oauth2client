@@ -1,4 +1,4 @@
-oauth2client package
+oauth2client_latest package
 ====================
 
 Subpackages
@@ -6,25 +6,25 @@ Subpackages
 
 .. toctree::
 
-    oauth2client.contrib
+    oauth2client_latest.contrib
 
 Submodules
 ----------
 
 .. toctree::
 
-   oauth2client.client
-   oauth2client.clientsecrets
-   oauth2client.crypt
-   oauth2client.file
-   oauth2client.service_account
-   oauth2client.tools
-   oauth2client.transport
+   oauth2client_latest.client
+   oauth2client_latest.clientsecrets
+   oauth2client_latest.crypt
+   oauth2client_latest.file
+   oauth2client_latest.service_account
+   oauth2client_latest.tools
+   oauth2client_latest.transport
 
 Module contents
 ---------------
 
-.. automodule:: oauth2client
+.. automodule:: oauth2client_latest
     :members:
     :undoc-members:
     :show-inheritance:

@@ -20,8 +20,8 @@ import mock
 from six.moves.urllib import request
 import unittest2
 
-from oauth2client import client
-from oauth2client import tools
+from oauth2client_latest import client
+from oauth2client_latest import tools
 
 try:
     import argparse
@@ -72,8 +72,8 @@ class TestRunFlow(unittest2.TestCase):
             auth_host_name='localhost')
 
     @mock.patch.object(sys, 'argv', ['ignored', '--noauth_local_webserver'])
-    @mock.patch('oauth2client.tools.logging')
-    @mock.patch('oauth2client.tools.input')
+    @mock.patch('oauth2client_latest.tools.logging')
+    @mock.patch('oauth2client_latest.tools.input')
     def test_run_flow_no_webserver(self, input_mock, logging_mock):
         input_mock.return_value = 'auth_code'
 
@@ -87,8 +87,8 @@ class TestRunFlow(unittest2.TestCase):
         self.storage.put.assert_called_once_with(self.credentials)
         self.credentials.set_store.assert_called_once_with(self.storage)
 
-    @mock.patch('oauth2client.tools.logging')
-    @mock.patch('oauth2client.tools.input')
+    @mock.patch('oauth2client_latest.tools.logging')
+    @mock.patch('oauth2client_latest.tools.input')
     def test_run_flow_no_webserver_explicit_flags(
             self, input_mock, logging_mock):
         input_mock.return_value = 'auth_code'
@@ -102,8 +102,8 @@ class TestRunFlow(unittest2.TestCase):
         self.flow.step2_exchange.assert_called_once_with(
             'auth_code', http=None)
 
-    @mock.patch('oauth2client.tools.logging')
-    @mock.patch('oauth2client.tools.input')
+    @mock.patch('oauth2client_latest.tools.logging')
+    @mock.patch('oauth2client_latest.tools.input')
     def test_run_flow_no_webserver_exchange_error(
             self, input_mock, logging_mock):
         input_mock.return_value = 'auth_code'
@@ -116,8 +116,8 @@ class TestRunFlow(unittest2.TestCase):
         self.flow.step2_exchange.assert_called_once_with(
             'auth_code', http=None)
 
-    @mock.patch('oauth2client.tools.logging')
-    @mock.patch('oauth2client.tools.ClientRedirectServer')
+    @mock.patch('oauth2client_latest.tools.logging')
+    @mock.patch('oauth2client_latest.tools.ClientRedirectServer')
     @mock.patch('webbrowser.open')
     def test_run_flow_webserver(
             self, webbrowser_open_mock, server_ctor_mock, logging_mock):
@@ -138,8 +138,8 @@ class TestRunFlow(unittest2.TestCase):
         webbrowser_open_mock.assert_called_once_with(
             'http://example.com/auth', autoraise=True, new=1)
 
-    @mock.patch('oauth2client.tools.logging')
-    @mock.patch('oauth2client.tools.ClientRedirectServer')
+    @mock.patch('oauth2client_latest.tools.logging')
+    @mock.patch('oauth2client_latest.tools.ClientRedirectServer')
     @mock.patch('webbrowser.open')
     def test_run_flow_webserver_exchange_error(
             self, webbrowser_open_mock, server_ctor_mock, logging_mock):
@@ -152,8 +152,8 @@ class TestRunFlow(unittest2.TestCase):
 
         self.assertTrue(self.server.handle_request.called)
 
-    @mock.patch('oauth2client.tools.logging')
-    @mock.patch('oauth2client.tools.ClientRedirectServer')
+    @mock.patch('oauth2client_latest.tools.logging')
+    @mock.patch('oauth2client_latest.tools.ClientRedirectServer')
     @mock.patch('webbrowser.open')
     def test_run_flow_webserver_no_code(
             self, webbrowser_open_mock, server_ctor_mock, logging_mock):
@@ -166,9 +166,9 @@ class TestRunFlow(unittest2.TestCase):
 
         self.assertTrue(self.server.handle_request.called)
 
-    @mock.patch('oauth2client.tools.logging')
-    @mock.patch('oauth2client.tools.ClientRedirectServer')
-    @mock.patch('oauth2client.tools.input')
+    @mock.patch('oauth2client_latest.tools.logging')
+    @mock.patch('oauth2client_latest.tools.ClientRedirectServer')
+    @mock.patch('oauth2client_latest.tools.input')
     def test_run_flow_webserver_fallback(
             self, input_mock, server_ctor_mock, logging_mock):
         server_ctor_mock.side_effect = socket.error()

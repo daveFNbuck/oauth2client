@@ -1,7 +1,7 @@
-oauth2client.contrib.keyring_storage module
+oauth2client_latest.contrib.keyring_storage module
 ===========================================
 
-.. automodule:: oauth2client.contrib.keyring_storage
+.. automodule:: oauth2client_latest.contrib.keyring_storage
     :members:
     :undoc-members:
     :show-inheritance:

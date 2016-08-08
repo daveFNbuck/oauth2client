@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Oauth2client tests.
+"""oauth2client_latest tests.
 
 Unit tests for service account credentials implemented using RSA.
 """
@@ -27,9 +27,9 @@ import rsa
 from six import BytesIO
 import unittest2
 
-from oauth2client import client
-from oauth2client import crypt
-from oauth2client import service_account
+from oauth2client_latest import client
+from oauth2client_latest import crypt
+from oauth2client_latest import service_account
 from .http_mock import HttpMockSequence
 
 
@@ -69,7 +69,7 @@ class ServiceAccountCredentialsTests(unittest2.TestCase):
         serialized_data = json.loads(serialized_str)
         expected_serialized = {
             '_class': 'ServiceAccountCredentials',
-            '_module': 'oauth2client.service_account',
+            '_module': 'oauth2client_latest.service_account',
             'token_expiry': None,
         }
         expected_serialized.update(to_serialize)
@@ -109,7 +109,7 @@ class ServiceAccountCredentialsTests(unittest2.TestCase):
         finally:
             os.remove(filename)
 
-    @mock.patch('oauth2client.crypt.Signer.from_string',
+    @mock.patch('oauth2client_latest.crypt.Signer.from_string',
                 return_value=object())
     def test_from_json_keyfile_name_factory(self, signer_factory):
         client_id = 'id123'
@@ -200,11 +200,11 @@ class ServiceAccountCredentialsTests(unittest2.TestCase):
             service_account.ServiceAccountCredentials.from_p12_keyfile(
                 service_account_email, filename)
 
-    @mock.patch('oauth2client.crypt.Signer', new=crypt.PyCryptoSigner)
+    @mock.patch('oauth2client_latest.crypt.Signer', new=crypt.PyCryptoSigner)
     def test_from_p12_keyfile_with_pycrypto(self):
         self._p12_not_implemented_helper()
 
-    @mock.patch('oauth2client.crypt.Signer', new=crypt.RsaSigner)
+    @mock.patch('oauth2client_latest.crypt.Signer', new=crypt.RsaSigner)
     def test_from_p12_keyfile_with_rsa(self):
         self._p12_not_implemented_helper()
 
@@ -261,7 +261,7 @@ class ServiceAccountCredentialsTests(unittest2.TestCase):
         # Make sure the original is unchanged.
         self.assertEqual(creds._kwargs['sub'], sub1)
 
-    @mock.patch('oauth2client.client._UTCNOW')
+    @mock.patch('oauth2client_latest.client._UTCNOW')
     def test_access_token(self, utcnow):
         # Configure the patch.
         seconds = 11
@@ -392,7 +392,7 @@ class JWTAccessCredentialsTests(unittest2.TestCase):
             private_key_id=self.private_key_id, client_id=self.client_id,
             additional_claims={'aud': self.url})
 
-    @mock.patch('oauth2client.client._UTCNOW')
+    @mock.patch('oauth2client_latest.client._UTCNOW')
     @mock.patch('time.time')
     def test_get_access_token_no_claims(self, time, utcnow):
         utcnow.return_value = T1_DATE
@@ -430,7 +430,7 @@ class JWTAccessCredentialsTests(unittest2.TestCase):
         self.assertEqual(payload['exp'], T3_EXPIRY)
         self.assertEqual(expires_in, T3_EXPIRY - T3)
 
-    @mock.patch('oauth2client.client._UTCNOW')
+    @mock.patch('oauth2client_latest.client._UTCNOW')
     @mock.patch('time.time')
     def test_get_access_token_additional_claims(self, time, utcnow):
         utcnow.return_value = T1_DATE
@@ -467,7 +467,7 @@ class JWTAccessCredentialsTests(unittest2.TestCase):
             new_credentials, service_account.ServiceAccountCredentials)
         self.assertEqual('dummy_scope', new_credentials._scopes)
 
-    @mock.patch('oauth2client.client._UTCNOW')
+    @mock.patch('oauth2client_latest.client._UTCNOW')
     @mock.patch('time.time')
     def test_authorize_success(self, time, utcnow):
         utcnow.return_value = T1_DATE
@@ -499,7 +499,7 @@ class JWTAccessCredentialsTests(unittest2.TestCase):
         utcnow.return_value = T2_DATE
         h.request(self.url)
 
-    @mock.patch('oauth2client.client._UTCNOW')
+    @mock.patch('oauth2client_latest.client._UTCNOW')
     @mock.patch('time.time')
     def test_authorize_no_aud(self, time, utcnow):
         utcnow.return_value = T1_DATE
@@ -534,7 +534,7 @@ class JWTAccessCredentialsTests(unittest2.TestCase):
         # Ensure we do not cache the token
         self.assertIsNone(jwt.access_token)
 
-    @mock.patch('oauth2client.client._UTCNOW')
+    @mock.patch('oauth2client_latest.client._UTCNOW')
     def test_authorize_stale_token(self, utcnow):
         utcnow.return_value = T1_DATE
         # Create an initial token
@@ -551,7 +551,7 @@ class JWTAccessCredentialsTests(unittest2.TestCase):
         self.assertEquals(self.jwt.token_expiry, T3_EXPIRY_DATE)
         self.assertNotEqual(token_1, token_2)
 
-    @mock.patch('oauth2client.client._UTCNOW')
+    @mock.patch('oauth2client_latest.client._UTCNOW')
     def test_authorize_401(self, utcnow):
         utcnow.return_value = T1_DATE
 
@@ -569,7 +569,7 @@ class JWTAccessCredentialsTests(unittest2.TestCase):
         # Check the 401 forced a new token
         self.assertNotEqual(token_1, token_2)
 
-    @mock.patch('oauth2client.client._UTCNOW')
+    @mock.patch('oauth2client_latest.client._UTCNOW')
     def test_refresh(self, utcnow):
         utcnow.return_value = T1_DATE
         token_1 = self.jwt.access_token

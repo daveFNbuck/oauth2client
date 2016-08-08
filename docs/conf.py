@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# oauth2client documentation build configuration file, created by
+# oauth2client_latest documentation build configuration file, created by
 # sphinx-quickstart on Wed Dec 17 23:13:19 2014.
 #
 
@@ -60,11 +60,11 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'oauth2client'
+project = u'oauth2client_latest'
 copyright = u'2014, Google, Inc'
 
 # Version info
-distro = get_distribution('oauth2client')
+distro = get_distribution('oauth2client_latest')
 version = distro.version
 release = distro.version
 
@@ -88,27 +88,27 @@ html_favicon = '_static/favicon.ico'
 
 html_static_path = ['_static']
 html_logo = '_static/google_logo.png'
-htmlhelp_basename = 'oauth2clientdoc'
+htmlhelp_basename = 'oauth2client_latestdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {}
 latex_documents = [
-    ('index', 'oauth2client.tex', u'oauth2client Documentation',
+    ('index', 'oauth2client_latest.tex', u'oauth2client_latest Documentation',
      u'Google, Inc.', 'manual'),
 ]
 
 # -- Options for manual page output ---------------------------------------
 
 man_pages = [
-    ('index', 'oauth2client', u'oauth2client Documentation',
+    ('index', 'oauth2client_latest', u'oauth2client_latest Documentation',
      [u'Google, Inc.'], 1)
 ]
 
 # -- Options for Texinfo output -------------------------------------------
 
 texinfo_documents = [
-    ('index', 'oauth2client', u'oauth2client Documentation',
-     u'Google, Inc.', 'oauth2client', 'One line description of project.',
+    ('index', 'oauth2client_latest', u'oauth2client_latest Documentation',
+     u'Google, Inc.', 'oauth2client_latest', 'One line description of project.',
      'Miscellaneous'),
 ]

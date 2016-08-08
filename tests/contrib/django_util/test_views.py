@@ -27,10 +27,10 @@ from six.moves import reload_module
 from tests.contrib.django_util import TestWithDjangoEnvironment
 from tests.contrib.django_util.models import CredentialsModel
 
-from oauth2client.client import FlowExchangeError, OAuth2WebServerFlow
-import oauth2client.contrib.django_util
-from oauth2client.contrib.django_util import views
-from oauth2client.contrib.django_util.models import CredentialsField
+from oauth2client_latest.client import FlowExchangeError, OAuth2WebServerFlow
+import oauth2client_latest.contrib.django_util
+from oauth2client_latest.contrib.django_util import views
+from oauth2client_latest.contrib.django_util.models import CredentialsField
 
 
 class OAuth2AuthorizeTest(TestWithDjangoEnvironment):
@@ -38,7 +38,7 @@ class OAuth2AuthorizeTest(TestWithDjangoEnvironment):
     def setUp(self):
         super(OAuth2AuthorizeTest, self).setUp()
         self.save_settings = copy.deepcopy(django.conf.settings)
-        reload_module(oauth2client.contrib.django_util)
+        reload_module(oauth2client_latest.contrib.django_util)
         self.user = User.objects.create_user(
           username='bill', email='bill@example.com', password='hunter2')
 
@@ -84,7 +84,7 @@ class Oauth2AuthorizeStorageModelTest(TestWithDjangoEnvironment):
         # OAuth2 Settings gets configured based on Django settings
         # at import time, so in order for us to reload the settings
         # we need to reload the module
-        reload_module(oauth2client.contrib.django_util)
+        reload_module(oauth2client_latest.contrib.django_util)
         self.user = User.objects.create_user(
             username='bill', email='bill@example.com', password='hunter2')
 
@@ -140,7 +140,7 @@ class Oauth2CallbackTest(TestWithDjangoEnvironment):
     def setUp(self):
         super(Oauth2CallbackTest, self).setUp()
         self.save_settings = copy.deepcopy(django.conf.settings)
-        reload_module(oauth2client.contrib.django_util)
+        reload_module(oauth2client_latest.contrib.django_util)
 
         self.CSRF_TOKEN = 'token'
         self.RETURN_URL = 'http://return-url.com'
@@ -152,7 +152,7 @@ class Oauth2CallbackTest(TestWithDjangoEnvironment):
         self.user = User.objects.create_user(
             username='bill', email='bill@example.com', password='hunter2')
 
-    @mock.patch('oauth2client.contrib.django_util.views.pickle')
+    @mock.patch('oauth2client_latest.contrib.django_util.views.pickle')
     def test_callback_works(self, pickle):
         request = self.factory.get('oauth2/oauth2callback', data={
             'state': json.dumps(self.fake_state),
@@ -181,7 +181,7 @@ class Oauth2CallbackTest(TestWithDjangoEnvironment):
             response.status_code, django.http.HttpResponseRedirect.status_code)
         self.assertEqual(response['Location'], self.RETURN_URL)
 
-    @mock.patch('oauth2client.contrib.django_util.views.pickle')
+    @mock.patch('oauth2client_latest.contrib.django_util.views.pickle')
     def test_callback_handles_bad_flow_exchange(self, pickle):
         request = self.factory.get('oauth2/oauth2callback', data={
             "state": json.dumps(self.fake_state),

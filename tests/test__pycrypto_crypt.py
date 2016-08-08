@@ -11,13 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Unit tests for oauth2client._pycrypto_crypt."""
+"""Unit tests for oauth2client_latest._pycrypto_crypt."""
 
 import os
 
 import unittest2
 
-from oauth2client import crypt
+from oauth2client_latest import crypt
 
 
 class TestPyCryptoVerifier(unittest2.TestCase):

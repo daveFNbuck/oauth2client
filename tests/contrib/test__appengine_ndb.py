@@ -20,8 +20,8 @@ from google.appengine.ext import testbed
 import mock
 import unittest2
 
-from oauth2client import client
-from oauth2client.contrib import appengine
+from oauth2client_latest import client
+from oauth2client_latest.contrib import appengine
 
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
@@ -58,7 +58,7 @@ class TestFlowNDBProperty(unittest2.TestCase):
 
         self.assertEqual('foo_client_id', retrieved.flow.client_id)
 
-    @mock.patch('oauth2client.contrib._appengine_ndb._LOGGER')
+    @mock.patch('oauth2client_latest.contrib._appengine_ndb._LOGGER')
     def test_validate_success(self, mock_logger):
         flow_prop = TestNDBModel.flow
         flow_val = client.flow_from_clientsecrets(
@@ -67,7 +67,7 @@ class TestFlowNDBProperty(unittest2.TestCase):
         mock_logger.info.assert_called_once_with('validate: Got type %s',
                                                  type(flow_val))
 
-    @mock.patch('oauth2client.contrib._appengine_ndb._LOGGER')
+    @mock.patch('oauth2client_latest.contrib._appengine_ndb._LOGGER')
     def test_validate_none(self, mock_logger):
         flow_prop = TestNDBModel.flow
         flow_val = None
@@ -75,7 +75,7 @@ class TestFlowNDBProperty(unittest2.TestCase):
         mock_logger.info.assert_called_once_with('validate: Got type %s',
                                                  type(flow_val))
 
-    @mock.patch('oauth2client.contrib._appengine_ndb._LOGGER')
+    @mock.patch('oauth2client_latest.contrib._appengine_ndb._LOGGER')
     def test_validate_bad_type(self, mock_logger):
         flow_prop = TestNDBModel.flow
         flow_val = object()
@@ -103,7 +103,7 @@ class TestCredentialsNDBProperty(unittest2.TestCase):
         retrieved = TestNDBModel.get_by_id('bar')
         self.assertIsInstance(retrieved.creds, client.Credentials)
 
-    @mock.patch('oauth2client.contrib._appengine_ndb._LOGGER')
+    @mock.patch('oauth2client_latest.contrib._appengine_ndb._LOGGER')
     def test_validate_success(self, mock_logger):
         creds_prop = TestNDBModel.creds
         creds_val = client.Credentials()
@@ -111,7 +111,7 @@ class TestCredentialsNDBProperty(unittest2.TestCase):
         mock_logger.info.assert_called_once_with('validate: Got type %s',
                                                  type(creds_val))
 
-    @mock.patch('oauth2client.contrib._appengine_ndb._LOGGER')
+    @mock.patch('oauth2client_latest.contrib._appengine_ndb._LOGGER')
     def test_validate_none(self, mock_logger):
         creds_prop = TestNDBModel.creds
         creds_val = None
@@ -119,7 +119,7 @@ class TestCredentialsNDBProperty(unittest2.TestCase):
         mock_logger.info.assert_called_once_with('validate: Got type %s',
                                                  type(creds_val))
 
-    @mock.patch('oauth2client.contrib._appengine_ndb._LOGGER')
+    @mock.patch('oauth2client_latest.contrib._appengine_ndb._LOGGER')
     def test_validate_bad_type(self, mock_logger):
         creds_prop = TestNDBModel.creds
         creds_val = object()
@@ -134,7 +134,7 @@ class TestCredentialsNDBProperty(unittest2.TestCase):
         creds_json = json.loads(creds_prop._to_base_type(creds))
         self.assertDictEqual(creds_json, {
             '_class': 'Credentials',
-            '_module': 'oauth2client.client',
+            '_module': 'oauth2client_latest.client',
             'token_expiry': None,
         })
 
@@ -146,7 +146,7 @@ class TestCredentialsNDBProperty(unittest2.TestCase):
         creds_prop = TestNDBModel.creds
         creds_json = json.dumps({
             '_class': 'Credentials',
-            '_module': 'oauth2client.client',
+            '_module': 'oauth2client_latest.client',
             'token_expiry': None,
         })
         creds = creds_prop._from_base_type(creds_json)

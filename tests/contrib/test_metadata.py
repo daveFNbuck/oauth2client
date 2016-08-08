@@ -19,7 +19,7 @@ import mock
 from six.moves import http_client
 import unittest2
 
-from oauth2client.contrib import _metadata
+from oauth2client_latest.contrib import _metadata
 from .. import http_mock
 
 
@@ -66,7 +66,7 @@ class TestMetadata(unittest2.TestCase):
         http_request.assert_called_once_with(EXPECTED_URL, **EXPECTED_KWARGS)
 
     @mock.patch(
-        'oauth2client.client._UTCNOW',
+        'oauth2client_latest.client._UTCNOW',
         return_value=datetime.datetime.min)
     def test_get_token_success(self, now):
         http_request = request_mock(
